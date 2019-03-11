@@ -25,19 +25,27 @@
 package org.gjt.sp.jedit.gui;
 
 //{{{ Imports
-import javax.swing.border.*;
-import javax.swing.text.Segment;
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
-import java.util.Objects;
-import java.util.StringTokenizer;
-import org.gjt.sp.jedit.textarea.*;
 import org.gjt.sp.jedit.*;
 import org.gjt.sp.jedit.gui.statusbar.StatusWidgetFactory;
-import org.gjt.sp.jedit.gui.statusbar.Widget;
 import org.gjt.sp.jedit.gui.statusbar.ToolTipLabel;
-import org.gjt.sp.util.*;
+import org.gjt.sp.jedit.gui.statusbar.Widget;
+import org.gjt.sp.jedit.textarea.JEditTextArea;
+import org.gjt.sp.util.StandardUtilities;
+import org.gjt.sp.util.Task;
+import org.gjt.sp.util.TaskListener;
+import org.gjt.sp.util.TaskManager;
+
+import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.Segment;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Objects;
+import java.util.StringTokenizer;
 //}}}
 
 /** The status bar used to display various information to the user.
@@ -355,6 +363,11 @@ public class StatusBar extends JPanel
 			int caretPosition = textArea.getCaretPosition();
 			int currLine = textArea.getCaretLine();
 
+			String bufftext = buffer.getText();
+			int totalwords = bufftext.split("\\s+").length;
+
+			int currentword = bufftext.substring(0, caretPosition).split("\\s+").length;
+
 			// there must be a better way of fixing this...
 			// the problem is that this method can sometimes
 			// be called as a result of a text area scroll
@@ -404,6 +417,12 @@ public class StatusBar extends JPanel
 				buf.append(caretPosition);
 				buf.append('/');
 				buf.append(bufferLength);
+				buf.append(')');
+
+				buf.append('(');
+				buf.append(currentword);
+				buf.append('/');
+				buf.append(totalwords);
 				buf.append(')');
 			}
 			else if (jEdit.getBooleanProperty("view.status.show-caret-offset", true))
