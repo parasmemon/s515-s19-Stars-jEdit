@@ -21,19 +21,17 @@
  */
 package org.gjt.sp.jedit.input;
 
-import org.gjt.sp.jedit.gui.KeyEventTranslator;
 import org.gjt.sp.jedit.Debug;
+import org.gjt.sp.jedit.JEditAbstractEditAction;
+import org.gjt.sp.jedit.gui.KeyEventTranslator;
+import org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent;
 import org.gjt.sp.util.Log;
+import org.jetbrains.annotations.Nullable;
 
-import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.gjt.sp.jedit.JEditAbstractEditAction;
-import org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent;
 
 /**
  * The abstract input handler manage the keyboard handling.
@@ -342,6 +340,24 @@ public abstract class AbstractInputHandler<E extends JEditAbstractEditAction>
 
 	public abstract void invokeAction(E action);
 
+	private static String getEventID(KeyEvent evt) {
+		String id;
+		int event = evt.getID();
+		if (event == KeyEvent.KEY_PRESSED){
+			id = "KEY_PRESSED";
+		}
+		else if (event == KeyEvent.KEY_RELEASED){
+			id = "KEY_RELEASED";
+		}
+		else if (event == KeyEvent.KEY_TYPED){
+			id = "KEY_TYPED";
+		}
+		else {
+			id = "unknown type";
+		}
+		return id;
+	}
+
 	//{{{ toString() method
 	/**
 	 * Return a String representation of the keyboard event for
@@ -353,22 +369,24 @@ public abstract class AbstractInputHandler<E extends JEditAbstractEditAction>
 	 */
 	public static String toString(KeyEvent evt)
 	{
-		String id;
-		switch(evt.getID())
-		{
-		case KeyEvent.KEY_PRESSED:
-			id = "KEY_PRESSED";
-			break;
-		case KeyEvent.KEY_RELEASED:
-			id = "KEY_RELEASED";
-			break;
-		case KeyEvent.KEY_TYPED:
-			id = "KEY_TYPED";
-			break;
-		default:
-			id = "unknown type";
-			break;
-		}
+//		String id;
+//		switch(evt.getID())
+//		{
+//			case KeyEvent.KEY_PRESSED:
+//				id = "KEY_PRESSED";
+//				break;
+//			case KeyEvent.KEY_RELEASED:
+//				id = "KEY_RELEASED";
+//				break;
+//			case KeyEvent.KEY_TYPED:
+//				id = "KEY_TYPED";
+//				break;
+//			default:
+//				id = "unknown type";
+//				break;
+//		}
+
+		String id = getEventID(evt);
 
 		StringBuilder b = new StringBuilder(50);
 
@@ -382,6 +400,12 @@ public abstract class AbstractInputHandler<E extends JEditAbstractEditAction>
 
 		return b.toString();
 	} //}}}
+
+	protected static String getString(KeyEvent evt) {
+		String id;
+		id = getString(evt);
+		return id;
+	}
 
 	//{{{ processKeyEventKeyStrokeHandling() method
 	/**
