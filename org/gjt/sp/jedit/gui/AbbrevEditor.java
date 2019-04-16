@@ -23,10 +23,11 @@
 package org.gjt.sp.jedit.gui;
 
 //{{{ Imports
-import javax.swing.border.*;
+import org.gjt.sp.jedit.jEdit;
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import org.gjt.sp.jedit.*;
 //}}}
 
 /** Panel for editing abbreviations */
@@ -128,6 +129,12 @@ public class AbbrevEditor extends JPanel
 			}
 		}
 
+		strbuilder(buf, afterCaretText);
+
+		return buf.toString();
+	} //}}}
+
+	private void strbuilder(StringBuilder buf, String afterCaretText) {
 		if(afterCaretText.length() != 0)
 		{
 			buf.append("\\|");
@@ -152,9 +159,7 @@ public class AbbrevEditor extends JPanel
 				}
 			}
 		}
-
-		return buf.toString();
-	} //}}}
+	}
 
 	//{{{ setExpansion() method
 	public void setExpansion(String expansion)
@@ -170,6 +175,18 @@ public class AbbrevEditor extends JPanel
 		String afterCaretText = null;
 		StringBuilder buf = new StringBuilder();
 
+		beforeCaretText = getString(expansion, beforeCaretText, buf);
+
+		if(beforeCaretText == null)
+			beforeCaretText = buf.toString();
+		else
+			afterCaretText = buf.toString();
+
+		beforeCaret.setText(beforeCaretText);
+		afterCaret.setText(afterCaretText);
+	} //}}}
+
+	private String getString(String expansion, String beforeCaretText, StringBuilder buf) {
 		for(int i = 0; i < expansion.length(); i++)
 		{
 			char ch = expansion.charAt(i);
@@ -197,15 +214,8 @@ public class AbbrevEditor extends JPanel
 			else
 				buf.append(ch);
 		}
-
-		if(beforeCaretText == null)
-			beforeCaretText = buf.toString();
-		else
-			afterCaretText = buf.toString();
-
-		beforeCaret.setText(beforeCaretText);
-		afterCaret.setText(afterCaretText);
-	} //}}}
+		return beforeCaretText;
+	}
 
 	//{{{ getAbbrevField() method
 	public JTextField getAbbrevField()
