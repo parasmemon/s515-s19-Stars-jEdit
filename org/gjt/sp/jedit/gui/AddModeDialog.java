@@ -169,7 +169,7 @@ public class AddModeDialog extends EnhancedDialog
 		public void actionPerformed(ActionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == browse)
+			if(source.equals(browse))
 			{
 				View view = jEdit.getActiveView();
 				String path = jEdit.getSettingsDirectory();
@@ -185,11 +185,11 @@ public class AddModeDialog extends EnhancedDialog
 					modeFile.setText("");	
 				}
 			}
-			else if (source == ok)
+			else if (source.equals(ok))
 			{
 				ok();	
 			}
-			else if (source == cancel)
+			else if (source.equals(cancel))
 			{
 				cancel();
 			}

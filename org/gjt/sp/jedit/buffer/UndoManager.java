@@ -140,7 +140,7 @@ public class UndoManager
 		{
 			if(compoundEdit.first == null)
 				/* nothing done between begin/end calls */;
-			else if(compoundEdit.first == compoundEdit.last)
+			else if(compoundEdit.first.equals(compoundEdit.last))
 				addEdit(compoundEdit.first);
 			else
 				addEdit(compoundEdit);
@@ -298,7 +298,7 @@ public class UndoManager
 		{
 			undoCount--;
 
-			if(undosFirst == undosLast)
+			if(undosFirst.equals(undosLast))
 				undosFirst = undosLast = null;
 			else
 			{
@@ -349,7 +349,7 @@ public class UndoManager
 		{
 			// don't fold a undoClearDirty Remove Edit, because
 			// it's the identity is significant.
-			if(lastElement == undoClearDirty || newElement == undoClearDirty)
+			if(lastElement.equals(undoClearDirty) || newElement.equals(undoClearDirty))
 				return null;
 
 			/* newElement is guaranteed to be an Compound-Insert Edit, redoClearDirty will be an Normal-Insert, Normal-Remove,
@@ -363,8 +363,8 @@ public class UndoManager
 			 *   redoClearDirty can never be any of the following Remove&Insert elements, as the user as no option to save the
 			 *   file after the first Remove&Insert sequence, because the GUI is blocked by the search&replace all operation.
 			 */  
-			assert newElement  != redoClearDirty;
-			assert lastElement != redoClearDirty;
+			assert !newElement.equals(redoClearDirty);
+			assert !lastElement.equals(redoClearDirty);
 
 			Remove rem = (Remove) lastElement;
 			Insert ins = (Insert) newElement;
@@ -453,7 +453,7 @@ public class UndoManager
 		Selection[] undo(UndoManager mgr)
 		{
 			mgr.buffer.remove(offset,str.length());
-			if(mgr.undoClearDirty == this)
+			if(mgr.undoClearDirty.equals(this))
 				mgr.buffer.setDirty(false);
 			return new Selection[] { new Selection.Range(offset, offset) };
 		} //}}}
@@ -463,7 +463,7 @@ public class UndoManager
 		Selection[] redo(UndoManager mgr)
 		{
 			mgr.buffer.insert(offset,str);
-			if(mgr.redoClearDirty == this)
+			if(mgr.redoClearDirty.equals(this))
 				mgr.buffer.setDirty(false);
 			int caret = offset + str.length();
 			return new Selection[] { new Selection.Range(caret, caret) };
@@ -488,7 +488,7 @@ public class UndoManager
 		Selection[] undo(UndoManager mgr)
 		{
 			mgr.buffer.insert(offset,str);
-			if(mgr.undoClearDirty == this)
+			if(mgr.undoClearDirty.equals(this))
 				mgr.buffer.setDirty(false);
 			return new Selection[] {
 				new Selection.Range(offset, offset + str.length())
@@ -500,7 +500,7 @@ public class UndoManager
 		Selection[] redo(UndoManager mgr)
 		{
 			mgr.buffer.remove(offset,str.length());
-			if(mgr.redoClearDirty == this)
+			if(mgr.redoClearDirty.equals(this))
 				mgr.buffer.setDirty(false);
 			return new Selection[] { new Selection.Range(offset, offset) };
 		} //}}}
@@ -526,7 +526,7 @@ public class UndoManager
 		{
 			mgr.buffer.remove(offset,strInsert.length());
 			mgr.buffer.insert(offset,strRemove);
-			assert mgr.undoClearDirty != this;
+			assert !mgr.undoClearDirty.equals(this);
 			return new Selection[] {
 				new Selection.Range(offset, offset + strRemove.length())
 			};
@@ -538,7 +538,7 @@ public class UndoManager
 		{
 			mgr.buffer.remove(offset,strRemove.length());
 			mgr.buffer.insert(offset,strInsert);
-			if(mgr.redoClearDirty == this)
+			if(mgr.redoClearDirty.equals(this))
 				mgr.buffer.setDirty(false);
 			int caret = offset + strInsert.length();
 			return new Selection[] { new Selection.Range(caret, caret) };
@@ -678,7 +678,7 @@ public class UndoManager
 		private void exchangeLastElement(Edit edit)
 		{
 			// remove last
-			if(first == last)
+			if(first.equals(last))
 				first = last = null;
 			else
 			{
@@ -687,7 +687,7 @@ public class UndoManager
 			}
 
 			// exchange current last
-			if(first == null || first == last)
+			if(first == null || first.equals(last))
 				first = last = edit;
 			else
 			{

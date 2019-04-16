@@ -193,13 +193,13 @@ public class StyleEditor extends EnhancedDialog implements ActionListener
 	public void actionPerformed(ActionEvent evt)
 	{
 		Object source = evt.getSource();
-		if(source == ok)
+		if(source.equals(ok))
 			ok();
-		else if(source == cancel)
+		else if(source.equals(cancel))
 			cancel();
-		else if(source == fgColorCheckBox)
+		else if(source.equals(fgColorCheckBox))
 			fgColor.setEnabled(fgColorCheckBox.isSelected());
-		else if(source == bgColorCheckBox)
+		else if(source.equals(bgColorCheckBox))
 			bgColor.setEnabled(bgColorCheckBox.isSelected());
 	} //}}}
 

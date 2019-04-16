@@ -235,11 +235,11 @@ public class ContextAddDialog extends EnhancedDialog
 				combo.setEnabled(action.isSelected());
 				list.setEnabled(action.isSelected());
 			}
-			if(source == ok)
+			if(source.equals(ok))
 				ok();
-			else if(source == cancel)
+			else if(source.equals(cancel))
 				cancel();
-			else if(source == combo)
+			else if(source.equals(combo))
 				updateList();
 		}
 	} //}}}

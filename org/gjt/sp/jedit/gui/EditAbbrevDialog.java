@@ -148,7 +148,7 @@ public class EditAbbrevDialog extends JDialog
 	{
 		public void actionPerformed(ActionEvent evt)
 		{
-			if(evt.getSource() == ok)
+			if(evt.getSource().equals(ok))
 			{
 				if(editor.getAbbrev() == null
 					|| editor.getAbbrev().length() == 0)

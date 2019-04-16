@@ -385,7 +385,7 @@ public abstract class TextArea extends JPanel
 	 */
 	public void setBuffer(JEditBuffer buffer)
 	{
-		if(this.buffer == buffer)
+		if(this.buffer.equals(buffer))
 			return;
 
 		try
@@ -2142,7 +2142,7 @@ forward_scan:	do
 	 */
 	public boolean caretAutoScroll()
 	{
-		return focusedComponent == this;
+		return focusedComponent.equals(this);
 	} //}}}
 
 	//{{{ addStructureMatcher() method
@@ -4712,7 +4712,7 @@ loop:		for(int i = lineNo - 1; i >= 0; i--)
 		ToolTipManager.sharedInstance().unregisterComponent(painter);
 		ToolTipManager.sharedInstance().unregisterComponent(gutter);
 
-		if(focusedComponent == this)
+		if(focusedComponent.equals(this))
 			focusedComponent = null;
 
 		caretTimer.stop();
@@ -5216,7 +5216,7 @@ loop:		for(int i = lineNo - 1; i >= 0; i--)
 		Object[] listeners = listenerList.getListenerList();
 		for(int i = listeners.length - 2; i >= 0; i--)
 		{
-			if(listeners[i] == StatusListener.class)
+			if(listeners[i].equals(StatusListener.class))
 			{
 				try
 				{
@@ -5368,7 +5368,7 @@ loop:		for(int i = lineNo - 1; i >= 0; i--)
 		Object[] listeners = listenerList.getListenerList();
 		for(int i = listeners.length - 2; i >= 0; i--)
 		{
-			if(listeners[i] == CaretListener.class)
+			if(listeners[i].equals(CaretListener.class))
 			{
 				try
 				{
@@ -5388,7 +5388,7 @@ loop:		for(int i = lineNo - 1; i >= 0; i--)
 		Object[] listeners = listenerList.getListenerList();
 		for(int i = listeners.length - 2; i >= 0; i--)
 		{
-			if(listeners[i] == ScrollListener.class)
+			if(listeners[i].equals(ScrollListener.class))
 			{
 				try
 				{
@@ -5411,7 +5411,7 @@ loop:		for(int i = lineNo - 1; i >= 0; i--)
 		Object[] listeners = listenerList.getListenerList();
 		for(int i = listeners.length - 2; i >= 0; i--)
 		{
-			if(listeners[i] == StatusListener.class)
+			if(listeners[i].equals(StatusListener.class))
 			{
 				try
 				{
@@ -5432,7 +5432,7 @@ loop:		for(int i = lineNo - 1; i >= 0; i--)
 		Object[] listeners = listenerList.getListenerList();
 		for(int i = listeners.length - 2; i >= 0; i--)
 		{
-			if(listeners[i] == StatusListener.class)
+			if(listeners[i].equals(StatusListener.class))
 			{
 				try
 				{
@@ -6552,7 +6552,7 @@ loop:		for(int i = lineNo - 1; i >= 0; i--)
 			if(!scrollBarsInitialized)
 				return;
 
-			if(evt.getAdjustable() == vertical)
+			if(evt.getAdjustable().equals(vertical))
 				setFirstLine(vertical.getValue());
 			else
 				setHorizontalOffset(-horizontal.getValue());

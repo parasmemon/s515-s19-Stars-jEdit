@@ -513,7 +513,7 @@ loop:		for(;;)
 
 					int start;
 
-					if(view.getBuffer() == buffer && !repeat)
+					if(view.getBuffer().equals(buffer) && !repeat)
 					{
 						JEditTextArea textArea = view.getTextArea();
 						Selection s = textArea.getSelectionAtOffset(

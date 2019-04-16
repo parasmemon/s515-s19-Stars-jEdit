@@ -389,7 +389,7 @@ public class PingPongList<E> extends JPanel
 				if(dropLocation == -1)dropLocation=0;
 				targetModel.add(dropLocation, transferData);
 				int dropStart = dropLocation;
-				if (targetList == sourceList)
+				if (targetList.equals(sourceList))
 				{
 					// we are moving inside the same list
 					for (int i = indices.length - 1; i >= 0; i--)
@@ -446,7 +446,7 @@ public class PingPongList<E> extends JPanel
 		@Override
 		public boolean canImport(JComponent comp, DataFlavor[] transferFlavors)
 		{
-			return comp == left || comp == right;
+			return comp.equals(left) || comp.equals(right);
 		}
 	} //}}}
 
@@ -493,13 +493,13 @@ public class PingPongList<E> extends JPanel
 		public void actionPerformed(ActionEvent ae)
 		{
 			Object source = ae.getSource();
-			if (source == selectAllButton)
+			if (source.equals(selectAllButton))
 			{
 				moveAllToRight();
 				selectAllButton.setEnabled(false);
 				selectNoneButton.setEnabled(true);
 			}
-			else if (source == selectNoneButton)
+			else if (source.equals(selectNoneButton))
 			{
 				moveAllToLeft();
 				selectAllButton.setEnabled(true);

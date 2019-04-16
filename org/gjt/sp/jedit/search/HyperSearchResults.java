@@ -188,9 +188,9 @@ public class HyperSearchResults extends JPanel implements DefaultFocusComponent
 	{
 		Buffer buffer = bmsg.getBuffer();
 		Object what = bmsg.getWhat();
-		if(what == BufferUpdate.LOADED)
+		if(what.equals(BufferUpdate.LOADED))
 			visitBuffers(new BufferLoadedVisitor(),buffer);
-		else if(what == BufferUpdate.CLOSED)
+		else if(what.equals(BufferUpdate.CLOSED))
 			visitBuffers(new BufferClosedVisitor(),buffer);
 	} //}}}
 
@@ -376,7 +376,7 @@ public class HyperSearchResults extends JPanel implements DefaultFocusComponent
 		Object value = node.getUserObject();
 
 		// do nothing if clicked "foo (showing n occurrences in m files)"
-		if(node.getParent() != resultTreeRoot && value instanceof HyperSearchNode)
+		if(!node.getParent().equals(resultTreeRoot) && value instanceof HyperSearchNode)
 		{
 			HyperSearchNode n = (HyperSearchNode)value;
 			Buffer buffer = n.getBuffer(view);
@@ -491,7 +491,7 @@ public class HyperSearchResults extends JPanel implements DefaultFocusComponent
 		public void actionPerformed(ActionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == highlight)
+			if(source.equals(highlight))
 			{
 				String prop = jEdit.getProperty(HIGHLIGHT_PROP);
 				Font f = (resultTree != null) ? resultTree.getFont() :
@@ -503,11 +503,11 @@ public class HyperSearchResults extends JPanel implements DefaultFocusComponent
 					jEdit.setProperty(HIGHLIGHT_PROP, GUIUtilities.getStyleString(style));
 				updateHighlightStatus();
 			}
-			else if(source == clear)
+			else if(source.equals(clear))
 			{
 				removeAllNodes();
 			}
-			else if(source == multi)
+			else if(source.equals(multi))
 			{
 				multiStatus = !multiStatus;
 				updateMultiStatus();
@@ -522,7 +522,7 @@ public class HyperSearchResults extends JPanel implements DefaultFocusComponent
 					}
 				}
 			}
-			else if(source == stop)
+			else if(source.equals(stop))
 			{
 				TaskManager.instance.cancelTasksByClass(HyperSearchRequest.class);
 			}

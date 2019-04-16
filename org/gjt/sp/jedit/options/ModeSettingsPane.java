@@ -249,7 +249,7 @@ public class ModeSettingsPane extends AbstractOptionPane
 	private void updateEnabled()
 	{
 		boolean enabled;
-		if(current == global)
+		if(current.equals(global))
 		{
 			enabled = true;
 			useDefaults.setEnabled(false);
@@ -287,12 +287,12 @@ public class ModeSettingsPane extends AbstractOptionPane
 		public void actionPerformed(ActionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == mode)
+			if(source.equals(mode))
 			{
 				saveMode();
 				selectMode();
 			}
-			else if(source == useDefaults)
+			else if(source.equals(useDefaults))
 			{
 				modeProps[mode.getSelectedIndex() - 1].useDefaults =
 					useDefaults.isSelected();

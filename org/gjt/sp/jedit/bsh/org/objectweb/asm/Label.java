@@ -156,7 +156,7 @@ public class Label {
     if (CodeWriter.CHECK) {
       if (this.owner == null) {
         this.owner = owner;
-      } else if (this.owner != owner) {
+      } else if (!this.owner.equals(owner)) {
         throw new IllegalArgumentException();
       }
     }
@@ -233,7 +233,7 @@ public class Label {
       if (this.owner == null) {
         this.owner = owner;
       }
-      if (resolved || this.owner != owner) {
+      if (resolved || !this.owner.equals(owner)) {
         throw new IllegalArgumentException();
       }
     }

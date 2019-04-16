@@ -356,13 +356,13 @@ public class FilesChangedDialog extends EnhancedDialog
 		public void actionPerformed(ActionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == selectAll)
+			if(source.equals(selectAll))
 				selectAll();
-			else if(source == reload)
+			else if(source.equals(reload))
 				action("RELOAD");
-			else if(source == close)
+			else if(source.equals(close))
 				dispose();
-			else if (source == ignore)
+			else if (source.equals(ignore))
 				action("IGNORE");
 		}
 	} //}}}
@@ -418,7 +418,7 @@ public class FilesChangedDialog extends EnhancedDialog
 		{
 			DefaultMutableTreeNode node = (DefaultMutableTreeNode)value;
 
-			if(node.getParent() == tree.getModel().getRoot())
+			if(node.getParent().equals(tree.getModel().getRoot()))
 				setFont(groupFont);
 			else
 				setFont(entryFont);

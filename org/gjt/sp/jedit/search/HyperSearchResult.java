@@ -256,8 +256,8 @@ public class HyperSearchResult implements HyperSearchNode
 		@EBHandler
 		public void handleBufferUpdate(BufferUpdate msg)
 		{
-			if (msg.getWhat() == BufferUpdate.LOADED &&
-				msg.getBuffer() == buffer)
+			if (msg.getWhat().equals(BufferUpdate.LOADED) &&
+                    msg.getBuffer().equals(buffer))
 			{
 				bufferLoaded();
 			}

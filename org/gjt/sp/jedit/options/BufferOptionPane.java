@@ -343,7 +343,7 @@ public class BufferOptionPane extends AbstractOptionPane
 		public void actionPerformed(ActionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == mode)
+			if(source.equals(mode))
 			{
 				Mode _mode = (Mode)mode.getSelectedItem();
 				folding.setSelectedItem(_mode.getProperty(

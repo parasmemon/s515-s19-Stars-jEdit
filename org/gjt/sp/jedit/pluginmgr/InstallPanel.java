@@ -348,7 +348,7 @@ class InstallPanel extends JPanel implements EBComponent
 	@Override
 	public void handleMessage(EBMessage message)
 	{
-		 if (message.getSource() == PluginManager.getInstance())
+		 if (message.getSource().equals(PluginManager.getInstance()))
 		 {
 			 chooseButton.path = jEdit.getProperty(PluginManager.PROPERTY_PLUGINSET, "");
 			 if (chooseButton.path.length() > 0)
@@ -686,7 +686,7 @@ class InstallPanel extends JPanel implements EBComponent
 			// make the row selected after updated filtering
 			for(int i=0; i< filteredEntries.size(); i++)
 			{
-				if(entry == filteredEntries.get(i))
+				if(entry.equals(filteredEntries.get(i)))
 				{
 					table.setRowSelectionInterval(i, i);
 					break;
@@ -711,7 +711,7 @@ class InstallPanel extends JPanel implements EBComponent
 				{
 					for (Entry temp: entries)
 					{
-						if (temp.plugin == dep.plugin)
+						if (temp.plugin.equals(dep.plugin))
 						{
 							if (entry.install)
 							{

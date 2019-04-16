@@ -111,11 +111,11 @@ class BSHUnaryExpression extends SimpleNode implements ParserConstants
             // ++ and -- must be cast back the original type
             if(kind == INCR || kind == DECR)
             {
-                if(operandType == Byte.TYPE)
+                if(operandType.equals(Byte.TYPE))
                     return new Byte((byte)result);
-                if(operandType == Short.TYPE)
+                if(operandType.equals(Short.TYPE))
                     return new Short((short)result);
-                if(operandType == Character.TYPE)
+                if(operandType.equals(Character.TYPE))
                     return new Character((char)result);
             }
 

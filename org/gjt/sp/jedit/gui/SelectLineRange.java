@@ -126,9 +126,9 @@ public class SelectLineRange extends EnhancedDialog implements ActionListener
 	public void actionPerformed(ActionEvent evt)
 	{
 		Object source = evt.getSource();
-		if(source == ok)
+		if(source.equals(ok))
 			ok();
-		else if(source == cancel)
+		else if(source.equals(cancel))
 			cancel();
 	} //}}}
 

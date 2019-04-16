@@ -96,15 +96,15 @@ public class DockableLayout implements LayoutManager2
 	//{{{ removeLayoutComponent() method
 	public void removeLayoutComponent(Component comp)
 	{
-		if(center == comp)
+		if(center.equals(comp))
 			center = null;
-		else if(comp == top)
+		else if(comp.equals(top))
 			top = null;
-		else if(comp == left)
+		else if(comp.equals(left))
 			left = null;
-		else if(comp == bottom)
+		else if(comp.equals(bottom))
 			bottom = null;
-		else if(comp == right)
+		else if(comp.equals(right))
 			right = null;
 	} //}}}
 

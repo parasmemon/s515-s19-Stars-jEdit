@@ -246,7 +246,7 @@ public abstract class AbstractContextOptionPane extends AbstractOptionPane
 		{
 			Object source = evt.getSource();
 
-			if (source == add)
+			if (source.equals(add))
 			{
 				ContextAddDialog dialog = new ContextAddDialog(
 					AbstractContextOptionPane.this, actionContext);
@@ -275,7 +275,7 @@ public abstract class AbstractContextOptionPane extends AbstractOptionPane
 				listModel.insertElementAt(menuItem, index);
 				list.setSelectedIndex(index);
 				list.ensureIndexIsVisible(index);
-			} else if (source == remove)
+			} else if (source.equals(remove))
 			{
 				int index = list.getSelectedIndex();
 				listModel.removeElementAt(index);
@@ -286,7 +286,7 @@ public abstract class AbstractContextOptionPane extends AbstractOptionPane
 							index));
 				}
 				updateButtons();
-			} else if (source == moveUp)
+			} else if (source.equals(moveUp))
 			{
 				int index = list.getSelectedIndex();
 				MenuItem selected = (MenuItem)list.getSelectedValue();
@@ -294,7 +294,7 @@ public abstract class AbstractContextOptionPane extends AbstractOptionPane
 				listModel.insertElementAt(selected, index - 1);
 				list.setSelectedIndex(index - 1);
 				list.ensureIndexIsVisible(index - 1);
-			} else if (source == moveDown)
+			} else if (source.equals(moveDown))
 			{
 				int index = list.getSelectedIndex();
 				MenuItem selected = (MenuItem)list.getSelectedValue();
@@ -302,7 +302,7 @@ public abstract class AbstractContextOptionPane extends AbstractOptionPane
 				listModel.insertElementAt(selected, index + 1);
 				list.setSelectedIndex(index + 1);
 				list.ensureIndexIsVisible(index + 1);
-			} else if (source == reset)
+			} else if (source.equals(reset))
 			{
 				String dialogType = "options.context.reset.dialog";
 				int result = GUIUtilities.confirm(list, dialogType, null,

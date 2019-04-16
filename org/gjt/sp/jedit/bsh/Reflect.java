@@ -374,7 +374,7 @@ class Reflect
 		String name, Object[] args, boolean staticOnly )
         throws ReflectError, UtilEvalError
     {
-		if ( object == Primitive.NULL )
+		if (object.equals(Primitive.NULL))
 			throw new UtilTargetError( new NullPointerException(
 				"Attempt to invoke method " +name+" on null value" ) );
 
@@ -754,7 +754,7 @@ class Reflect
 		getterName = accessorName("is", propName );
 		try {
 			Method m = clas.getMethod( getterName, new Class [0] );
-			return ( m.getReturnType() == Boolean.TYPE );
+			return (m.getReturnType().equals(Boolean.TYPE));
 		} catch ( NoSuchMethodException e ) {
 			return false;
 		}
@@ -797,7 +797,7 @@ class Reflect
 				method = resolveExpectedJavaMethod(
 					null/*bcm*/, obj.getClass(), obj,
 					accessorName, args, false );
-				if ( method.getReturnType() != Boolean.TYPE )
+				if (!method.getReturnType().equals(Boolean.TYPE))
 					method = null;
 			} catch ( Exception e ) {
 				e2 = e;

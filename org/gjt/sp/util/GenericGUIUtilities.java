@@ -331,7 +331,7 @@ public class GenericGUIUtilities {
 	{
 		while(comp2 != null)
 		{
-			if(comp1 == comp2)
+			if(comp1.equals(comp2))
 				return true;
 			else
 				comp2 = comp2.getParent();

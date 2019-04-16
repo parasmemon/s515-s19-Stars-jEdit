@@ -289,9 +289,9 @@ public class PasteFromListDialog extends EnhancedDialog
 		public void actionPerformed(ActionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == insert)
+			if(source.equals(insert))
 				ok();
-			else if(source == cancel)
+			else if(source.equals(cancel))
 				cancel();
 		}
 	} //}}}

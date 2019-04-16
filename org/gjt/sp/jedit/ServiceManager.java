@@ -149,7 +149,7 @@ public class ServiceManager
 		while(descriptors.hasNext())
 		{
 			Descriptor d = descriptors.next();
-			if(d.plugin == plugin)
+			if(d.plugin.equals(plugin))
 				descriptors.remove();
 		}
 	} //}}}

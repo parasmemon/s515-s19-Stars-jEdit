@@ -103,23 +103,23 @@ public class ScrollLayout implements LayoutManager
  	 */
 	public void removeLayoutComponent(Component comp)
 	{
-		if(center == comp)
+		if(center.equals(comp))
 			center = null;
-		else if(right == comp)
+		else if(right.equals(comp))
 			right = null;
-		else if(left == comp)
+		else if(left.equals(comp))
 			left = null;
-		else if(bottom == comp)
+		else if(bottom.equals(comp))
 			bottom = null;
-		else if(top == comp)
+		else if(top.equals(comp))
 			top = null;
-		else if(topLeft == comp)
+		else if(topLeft.equals(comp))
 			topLeft = null;
-		else if(topRight == comp)
+		else if(topRight.equals(comp))
 			topRight = null;
-		else if(bottomLeft == comp)
+		else if(bottomLeft.equals(comp))
 			bottomLeft = null;
-		else if(bottomRight == comp)
+		else if(bottomRight.equals(comp))
 			bottomRight = null;
 	} //}}}
 

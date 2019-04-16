@@ -185,7 +185,7 @@ public class PanelWindowContainer implements DockableWindowContainer, DockingAre
 		if(entry.win != null)
 			dockablePanel.remove(entry.win);
 
-		if(current == entry)
+		if(current.equals(entry))
 		{
 			current = null;
 			show(current);
@@ -210,7 +210,7 @@ public class PanelWindowContainer implements DockableWindowContainer, DockingAre
 			entry.win = null;
 		}
 
-		if(current == entry)
+		if(current.equals(entry))
 		{
 			current = null;
 			show(current);
@@ -243,7 +243,7 @@ public class PanelWindowContainer implements DockableWindowContainer, DockingAre
 	@SuppressWarnings({"deprecation"})	// see notes below		
 	public void show(DockableWindowManagerImpl.Entry entry)
 	{
-		if(current == entry)
+		if(current.equals(entry))
 		{
 			if(entry != null)
 			{
@@ -273,7 +273,7 @@ public class PanelWindowContainer implements DockableWindowContainer, DockingAre
 			mostRecent = entry.factory.name;
 			this.current = entry;
 
-			if(entry.win.getParent() != dockablePanel)
+			if(!entry.win.getParent().equals(dockablePanel))
 				dockablePanel.add(entry.factory.name,entry.win);
 
 			dockablePanel.showDockable(entry.factory.name);
@@ -314,7 +314,7 @@ public class PanelWindowContainer implements DockableWindowContainer, DockingAre
 	//{{{ isVisible() method
 	public boolean isVisible(DockableWindowManagerImpl.Entry entry)
 	{
-		return current == entry;
+		return current.equals(entry);
 	} //}}}
 
 	//{{{ getCurrent() method
@@ -452,7 +452,7 @@ public class PanelWindowContainer implements DockableWindowContainer, DockingAre
 			if(popup != null && popup.isVisible())
 				popup.setVisible(false);
 
-			if(evt.getSource() == closeBox)
+			if(evt.getSource().equals(closeBox))
 				show((DockableWindowManagerImpl.Entry)null);
 			else
 			{
@@ -482,7 +482,7 @@ public class PanelWindowContainer implements DockableWindowContainer, DockingAre
 			else
 				dockable = getCurrent();
 
-			if(comp == menuBtn || GenericGUIUtilities.isPopupTrigger(evt))
+			if(comp.equals(menuBtn) || GenericGUIUtilities.isPopupTrigger(evt))
 			{
 				if(dockable == null)
 				{
@@ -495,7 +495,7 @@ public class PanelWindowContainer implements DockableWindowContainer, DockingAre
 
 				int x, y;
 				boolean point;
-				if(comp == menuBtn)
+				if(comp.equals(menuBtn))
 				{
 					x = 0;
 					y = menuBtn.getHeight();

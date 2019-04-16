@@ -304,7 +304,7 @@ public class StatusBarOptionPane extends AbstractOptionPane
 		{
 			Object source = evt.getSource();
 
-			if(source == add)
+			if(source.equals(add))
 			{
 				WidgetSelectionDialog dialog = new WidgetSelectionDialog(StatusBarOptionPane.this);
 				String value = dialog.getValue();
@@ -322,7 +322,7 @@ public class StatusBarOptionPane extends AbstractOptionPane
 				list.ensureIndexIsVisible(index);
 				updatePreview();
 			}
-			else if(source == remove)
+			else if(source.equals(remove))
 			{
 				int index = list.getSelectedIndex();
 				listModel.removeElementAt(index);
@@ -336,7 +336,7 @@ public class StatusBarOptionPane extends AbstractOptionPane
 				updateButtons();
 				updatePreview();
 			}
-			else if(source == moveUp)
+			else if(source.equals(moveUp))
 			{
 				int index = list.getSelectedIndex();
 				Object selected = list.getSelectedValue();
@@ -346,7 +346,7 @@ public class StatusBarOptionPane extends AbstractOptionPane
 				list.ensureIndexIsVisible(index-1);
 				updatePreview();
 			}
-			else if(source == moveDown)
+			else if(source.equals(moveDown))
 			{
 				int index = list.getSelectedIndex();
 				Object selected = list.getSelectedValue();
@@ -356,7 +356,7 @@ public class StatusBarOptionPane extends AbstractOptionPane
 				list.ensureIndexIsVisible(index+1);
 				updatePreview();
 			}
-			else if(source == edit)
+			else if(source.equals(edit))
 			{
 				Object selectedValue = list.getSelectedValue();
 				if (selectedValue == null)
@@ -559,21 +559,21 @@ public class StatusBarOptionPane extends AbstractOptionPane
 			public void actionPerformed(ActionEvent evt)
 			{
 				Object source = evt.getSource();
-				if (source == ok)
+				if (source.equals(ok))
 				{
 					ok();
 				}
-				else if (source == cancel)
+				else if (source.equals(cancel))
 				{
 					cancel();
 				}
-				else if (source == labelRadio)
+				else if (source.equals(labelRadio))
 				{
 					labelField.setEnabled(true);
 					widgetCombo.setEnabled(false);
 					validate();
 				}
-				else if (source == widgetRadio)
+				else if (source.equals(widgetRadio))
 				{
 					labelField.setEnabled(false);
 					widgetCombo.setEnabled(true);

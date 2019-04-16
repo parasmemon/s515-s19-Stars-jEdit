@@ -181,7 +181,7 @@ class HelpIndex
 	public Word lookupWord(String word)
 	{
 		Object o = words.get(word);
-		if(o == IGNORE)
+		if(o.equals(IGNORE))
 			return null;
 		else
 			return (Word)o;
@@ -299,7 +299,7 @@ class HelpIndex
 		word = word.toLowerCase();
 
 		Object o = words.get(word);
-		if(o == IGNORE)
+		if(o.equals(IGNORE))
 			return;
 
 		if(o == null)

@@ -155,14 +155,14 @@ public class TipOfTheDay extends EnhancedDialog
 		public void actionPerformed(ActionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == showNextTime)
+			if(source.equals(showNextTime))
 			{
 				jEdit.setBooleanProperty("tip.show",showNextTime
 					.isSelected());
 			}
-			else if(source == nextTip)
+			else if(source.equals(nextTip))
 				nextTip();
-			else if(source == close)
+			else if(source.equals(close))
 				dispose();
 		}
 	} //}}}

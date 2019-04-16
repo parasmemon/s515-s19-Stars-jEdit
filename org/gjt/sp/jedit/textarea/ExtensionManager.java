@@ -67,7 +67,7 @@ class ExtensionManager
 		Iterator<Entry> iter = extensions.iterator();
 		while(iter.hasNext())
 		{
-			if(iter.next().ext == ext)
+			if(iter.next().ext.equals(ext))
 			{
 				iter.remove();
 				return;

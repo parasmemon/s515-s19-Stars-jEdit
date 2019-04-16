@@ -195,7 +195,7 @@ public class TextAreaPainter extends JComponent implements TabExpander
 	 */
 	public void setCursor(Cursor cursor)
 	{
-		defaultCursor = cursor == hiddenCursor || cursor.getType() == Cursor.TEXT_CURSOR;
+		defaultCursor = cursor.equals(hiddenCursor) || cursor.getType() == Cursor.TEXT_CURSOR;
 		super.setCursor(cursor);
 	} //}}}
 

@@ -238,11 +238,11 @@ public class ViewOptionPane extends AbstractOptionPane
 	protected void _save()
 	{
 		jEdit.setBooleanProperty("view.docking.alternateLayout",
-			layout.getIcon() == layoutIcon2
-			|| layout.getIcon() == layoutIcon4);
+			layout.getIcon().equals(layoutIcon2)
+			|| layout.getIcon().equals(layoutIcon4));
 		jEdit.setBooleanProperty("view.toolbar.alternateLayout",
-			layout.getIcon() == layoutIcon3
-			|| layout.getIcon() == layoutIcon4);
+			layout.getIcon().equals(layoutIcon3)
+			|| layout.getIcon().equals(layoutIcon4));
 		jEdit.setBooleanProperty("view.abbreviatePaths",abbreviatePaths.isSelected());		
 		jEdit.setBooleanProperty("view.showFullPath",showFullPath.isSelected());
 		jEdit.setBooleanProperty("view.toolbar.floatable", floatableToolbars.isSelected());
@@ -293,29 +293,29 @@ public class ViewOptionPane extends AbstractOptionPane
 	{
 		public void actionPerformed(ActionEvent evt)
 		{
-			if(evt.getSource() == alternateDockingLayout)
+			if(evt.getSource().equals(alternateDockingLayout))
 			{
-				if(layout.getIcon() == layoutIcon1)
+				if(layout.getIcon().equals(layoutIcon1))
 					layout.setIcon(layoutIcon2);
-				else if(layout.getIcon() == layoutIcon2)
+				else if(layout.getIcon().equals(layoutIcon2))
 					layout.setIcon(layoutIcon1);
-				else if(layout.getIcon() == layoutIcon3)
+				else if(layout.getIcon().equals(layoutIcon3))
 					layout.setIcon(layoutIcon4);
-				else if(layout.getIcon() == layoutIcon4)
+				else if(layout.getIcon().equals(layoutIcon4))
 					layout.setIcon(layoutIcon3);
 			}
-			else if(evt.getSource() == alternateToolBarLayout)
+			else if(evt.getSource().equals(alternateToolBarLayout))
 			{
-				if(layout.getIcon() == layoutIcon1)
+				if(layout.getIcon().equals(layoutIcon1))
 					layout.setIcon(layoutIcon3);
-				else if(layout.getIcon() == layoutIcon3)
+				else if(layout.getIcon().equals(layoutIcon3))
 					layout.setIcon(layoutIcon1);
-				else if(layout.getIcon() == layoutIcon2)
+				else if(layout.getIcon().equals(layoutIcon2))
 					layout.setIcon(layoutIcon4);
-				else if(layout.getIcon() == layoutIcon4)
+				else if(layout.getIcon().equals(layoutIcon4))
 					layout.setIcon(layoutIcon2);
 			}
-			else if (evt.getSource() == showBufferSwitcher)
+			else if (evt.getSource().equals(showBufferSwitcher))
 			{
 				bufferSwitcherMaxRowCount.setEditable(showBufferSwitcher.isSelected());
 			}

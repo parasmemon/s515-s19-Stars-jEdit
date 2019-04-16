@@ -448,8 +448,8 @@ public class VFSBrowser extends JPanel implements DefaultFocusComponent,
 	@EBHandler
 	public void handleBufferUpdate(BufferUpdate bmsg)
 	{
-		if (bmsg.getWhat() == BufferUpdate.CREATED ||
-			bmsg.getWhat() == BufferUpdate.CLOSED)
+		if (bmsg.getWhat().equals(BufferUpdate.CREATED) ||
+                bmsg.getWhat().equals(BufferUpdate.CLOSED))
 		{
 			browserView.updateFileView();
 		}
@@ -459,8 +459,8 @@ public class VFSBrowser extends JPanel implements DefaultFocusComponent,
 	@EBHandler
 	public void handlePluginUpdate(PluginUpdate pmsg)
 	{
-		if((pmsg.getWhat() == PluginUpdate.LOADED ||
-		   pmsg.getWhat() == PluginUpdate.UNLOADED) &&
+		if((pmsg.getWhat().equals(PluginUpdate.LOADED) ||
+                pmsg.getWhat().equals(PluginUpdate.UNLOADED)) &&
 		   plugins != null /* plugins can be null if the VFSBrowser menu bar is hidden */)
 		{
 			plugins.updatePopupMenu();
@@ -734,7 +734,7 @@ public class VFSBrowser extends JPanel implements DefaultFocusComponent,
 				@Override
 				public void done(Task t)
 				{
-					if (task == t)
+					if (task.equals(t))
 					{
 						latch.countDown();
 						TaskManager.instance.removeTaskListener(this);
@@ -1244,7 +1244,7 @@ check_selected:
 					EditPane[] editPanes = view.getEditPanes();
 					for (EditPane editPane : editPanes)
 					{
-						if (editPane.getBuffer() == _buffer)
+						if (editPane.getBuffer().equals(_buffer))
 						{
 							jEdit.closeBuffer(view, _buffer);
 							return;
@@ -1282,7 +1282,7 @@ check_selected:
 		Object[] listeners = listenerList.getListenerList();
 		for(int i = 0; i < listeners.length; i++)
 		{
-			if(listeners[i] == BrowserListener.class)
+			if(listeners[i].equals(BrowserListener.class))
 			{
 				BrowserListener l = (BrowserListener)listeners[i+1];
 				l.filesActivated(this,selectedFiles);
@@ -1434,7 +1434,7 @@ check_selected:
 		Object[] listeners = listenerList.getListenerList();
 		for(int i = 0; i < listeners.length; i++)
 		{
-			if(listeners[i] == BrowserListener.class)
+			if(listeners[i].equals(BrowserListener.class))
 			{
 				BrowserListener l = (BrowserListener)listeners[i+1];
 				l.filesSelected(this,selectedFiles);
@@ -1659,8 +1659,8 @@ check_selected:
 
 			Object source = evt.getSource();
 
-			if (source == pathField
-			    || source == filterCheckbox)
+			if (source.equals(pathField)
+			    || source.equals(filterCheckbox))
 			{
 				isProcessingEvent = true;
 				resetLater();
@@ -1674,7 +1674,7 @@ check_selected:
 				browserView.focusOnFileView();
 			}
 
-			else if (source == filterField.getEditor())
+			else if (source.equals(filterField.getEditor()))
 			{
 				// force the editor to refresh.
 				filterField.getEditor().setItem(
@@ -1683,7 +1683,7 @@ check_selected:
 
 			// depending on Swing look & feel, filterField.getEditor()
 			// returns some ComboBoxUI
-			else if (source == filterEditor)
+			else if (source.equals(filterEditor))
 			{
 				// force the editor to refresh.
 				filterEditor.setItem(
@@ -2089,7 +2089,7 @@ check_selected:
 		@Override
 		public void setItem(Object item)
 		{
-			if (item == current)
+			if (item.equals(current))
 			{
 				// if we keep the same object, swing
 				// will cause an event to be fired

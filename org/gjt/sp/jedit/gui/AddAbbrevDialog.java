@@ -89,7 +89,7 @@ public class AddAbbrevDialog extends JDialog
 		public void actionPerformed(ActionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == global)
+			if(source.equals(global))
 			{
 				String _abbrev = editor.getAbbrev();
 				if(_abbrev == null || _abbrev.length() == 0)
@@ -100,7 +100,7 @@ public class AddAbbrevDialog extends JDialog
 				Abbrevs.addGlobalAbbrev(_abbrev,editor.getExpansion());
 				Abbrevs.expandAbbrev(view,false);
 			}
-			else if(source == modeSpecific)
+			else if(source.equals(modeSpecific))
 			{
 				String _abbrev = editor.getAbbrev();
 				if(_abbrev == null || _abbrev.length() == 0)

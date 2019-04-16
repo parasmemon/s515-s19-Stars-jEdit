@@ -94,7 +94,7 @@ public class JARClassLoader extends ClassLoader
 		}
 
 		Object obj = classHash.get(clazz);
-		if(obj == NO_CLASS)
+		if(obj.equals(NO_CLASS))
 		{
 			// we remember which classes we don't exist
 			// because BeanShell tries loading all possible
@@ -238,7 +238,7 @@ public class JARClassLoader extends ClassLoader
 		{
 			for (Map.Entry<String, Object> entry : classHash.entrySet())
 			{
-				if (entry.getValue() != NO_CLASS)
+				if (!entry.getValue().equals(NO_CLASS))
 				{
 					Log.log(Log.DEBUG, JARClassLoader.class,
 						entry.getKey() + " ==> "
@@ -347,7 +347,7 @@ public class JARClassLoader extends ClassLoader
 			for (String aClass : classes)
 			{
 				Object loader = classHash.get(aClass);
-				if (loader == this)
+				if (loader.equals(this))
 					classHash.remove(aClass);
 				/* else two plugins provide same class! */
 			}
@@ -360,7 +360,7 @@ public class JARClassLoader extends ClassLoader
 		for (String resource : resources)
 		{
 			Object loader = resourcesHash.get(resource);
-			if (loader == this)
+			if (loader.equals(this))
 				resourcesHash.remove(resource);
 			/* else two plugins provide same resource! */
 		}

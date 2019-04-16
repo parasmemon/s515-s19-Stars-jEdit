@@ -236,7 +236,7 @@ public abstract class BeanShellFacade<T>
 				interpForMethods,new CallStack(), null);
 			if(retVal instanceof Primitive)
 			{
-				if(retVal == Primitive.VOID)
+				if(retVal.equals(Primitive.VOID))
 					return null;
 				else
 					return ((Primitive)retVal).getValue();
@@ -283,7 +283,7 @@ public abstract class BeanShellFacade<T>
 	 */
 	protected void setVariable(NameSpace nameSpace, String name, Object object) throws UtilEvalError
 	{
-		if (nameSpace.getVariable(name) == Primitive.VOID)
+		if (nameSpace.getVariable(name).equals(Primitive.VOID))
 			nameSpace.setVariable(name,object, false);
 	} //}}}
 

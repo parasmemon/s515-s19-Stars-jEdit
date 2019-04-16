@@ -409,7 +409,7 @@ public class TextAreaOptionPane extends AbstractOptionPane
 
 		public void actionPerformed(ActionEvent ae)
 		{
-			if (ae.getSource() == add)
+			if (ae.getSource().equals(add))
 			{
 				JDialog parent = GenericGUIUtilities.getParentDialog(this);
 				Font selected =
@@ -421,13 +421,13 @@ public class TextAreaOptionPane extends AbstractOptionPane
 					fonts.setSelectedIndex(fontsModel.size() - 1);
 				}
 			}
-			else if (ae.getSource() ==  remove)
+			else if (ae.getSource().equals(remove))
 			{
 				int idx = fonts.getSelectedIndex();
 				if (idx != -1)
 					fontsModel.removeElementAt(idx);
 			}
-			else if (ae.getSource() == up)
+			else if (ae.getSource().equals(up))
 			{
 				int idx = fonts.getSelectedIndex();
 				if (idx > 0)
@@ -438,7 +438,7 @@ public class TextAreaOptionPane extends AbstractOptionPane
 					fonts.setSelectedIndex(idx - 1);
 				}
 			}
-			else if (ae.getSource() == down)
+			else if (ae.getSource().equals(down))
 			{
 				int idx = fonts.getSelectedIndex();
 				if (idx != -1 && idx < fontsModel.size() - 1)

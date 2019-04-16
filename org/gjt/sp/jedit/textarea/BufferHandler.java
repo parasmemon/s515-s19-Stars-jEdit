@@ -79,7 +79,7 @@ class BufferHandler implements BufferListener
 	{
 		//System.err.println("foldLevelChanged " + (start-1) + " to " + textArea.getLastPhysicalLine() + "," + end);
 
-		if(textArea.getDisplayManager() == displayManager
+		if(textArea.getDisplayManager().equals(displayManager)
 			&& end != 0 && !buffer.isLoading())
 		{
 			textArea.invalidateLineRange(start - 1,
@@ -106,7 +106,7 @@ class BufferHandler implements BufferListener
 		FirstLine firstLine = displayManager.firstLine;
 		ScrollLineCount scrollLineCount = displayManager.scrollLineCount;
 
-		if(textArea.getDisplayManager() == displayManager)
+		if(textArea.getDisplayManager().equals(displayManager))
 		{
 			firstLine.contentInserted(startLine,numLines);
 			scrollLineCount.contentInserted(startLine,numLines);
@@ -169,7 +169,7 @@ class BufferHandler implements BufferListener
 		if(buffer.isLoading())
 			return;
 
-		if(textArea.getDisplayManager() == displayManager)
+		if(textArea.getDisplayManager().equals(displayManager))
 		{
 			getReadyToBreakFold(startLine);
 			displayManager.firstLine.preContentInserted(startLine, numLines);
@@ -197,7 +197,7 @@ class BufferHandler implements BufferListener
 		FirstLine firstLine = displayManager.firstLine;
 		ScrollLineCount scrollLineCount = displayManager.scrollLineCount;
 
-		if(textArea.getDisplayManager() == displayManager)
+		if(textArea.getDisplayManager().equals(displayManager))
 		{
 			if(numLines == 0)
 			{
@@ -268,7 +268,7 @@ class BufferHandler implements BufferListener
 		FirstLine firstLine = displayManager.firstLine;
 		ScrollLineCount scrollLineCount = displayManager.scrollLineCount;
 
-		if(textArea.getDisplayManager() == displayManager)
+		if(textArea.getDisplayManager().equals(displayManager))
 		{
 			firstLine.contentRemoved(startLine,start,numLines);
 			scrollLineCount.contentRemoved(startLine,start,numLines);
@@ -322,7 +322,7 @@ class BufferHandler implements BufferListener
 	//{{{ transactionComplete() method
 	public void transactionComplete(JEditBuffer buffer)
 	{
-		if(textArea.getDisplayManager() != displayManager)
+		if(!textArea.getDisplayManager().equals(displayManager))
 		{
 			delayedUpdate = false;
 			return;

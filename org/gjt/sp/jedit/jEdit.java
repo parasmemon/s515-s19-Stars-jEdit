@@ -1558,7 +1558,7 @@ public class jEdit
 
 		if(view != null && retVal != null)
 		{
-			if(view.getBuffer() != retVal)
+			if(!view.getBuffer().equals(retVal))
 			{
 				view.setBuffer(retVal);
 				// Although gotoMarker code is set to execute its code in a runAfterIoTasks runnable,
@@ -2580,7 +2580,7 @@ public class jEdit
 		boolean notifyFileChanged = false;
 		while(buffer != null)
 		{
-			if(currentBuffer && buffer != view.getBuffer())
+			if(currentBuffer && !buffer.equals(view.getBuffer()))
 			{
 				buffer = buffer.next;
 				i++;
@@ -2746,7 +2746,7 @@ public class jEdit
 			}
 
 			// show tip of the day
-			if(newView == viewsFirst)
+			if(newView.equals(viewsFirst))
 			{
 				newView.getTextArea().requestFocus();
 
@@ -2885,7 +2885,7 @@ public class jEdit
 	 */
 	public static boolean isMainThread()
 	{
-		return Thread.currentThread() == mainThread;
+		return Thread.currentThread().equals(mainThread);
 	} //}}}
 
 	//{{{ isBackgroundMode() method
@@ -3389,7 +3389,7 @@ public class jEdit
 			Buffer b = (Buffer) iterator.next();
 			// Since values() is a Collection connected to bufferHash, removing buffer from the
 			// values() collection also removes it from bufferHash
-			if(buffer == b)
+			if(buffer.equals(b))
 				iterator.remove();
         }
 
@@ -4529,7 +4529,7 @@ loop:
 				else
 					throw new InternalError();
 
-				if(view != null && view.getBuffer() == buffer)
+				if(view != null && view.getBuffer().equals(buffer))
 				{
 					view.getTextArea().setCaretPosition(pos);
 					buffer.setIntegerProperty(Buffer.CARET,pos);
@@ -4602,7 +4602,7 @@ loop:
 						buffer.next = _buffer;
 						buffer.prev = _buffer.prev;
 						_buffer.prev = buffer;
-						if(_buffer != buffersFirst)
+						if(!_buffer.equals(buffersFirst))
 							buffer.prev.next = buffer;
 						else
 							buffersFirst = buffer;
@@ -4635,13 +4635,13 @@ loop:
 
 			bufferHash.remove(path);
 
-			if(buffer == buffersFirst && buffer == buffersLast)
+			if(buffer.equals(buffersFirst) && buffer.equals(buffersLast))
 			{
 				buffersFirst = buffersLast = null;
 				return;
 			}
 
-			if(buffer == buffersFirst)
+			if(buffer.equals(buffersFirst))
 			{
 				buffersFirst = buffer.next;
 				buffer.next.prev = null;
@@ -4652,7 +4652,7 @@ loop:
 					buffer.prev.next = buffer.next;
 			}
 
-			if(buffer == buffersLast)
+			if(buffer.equals(buffersLast))
 			{
 				buffersLast = buffersLast.prev;
 				buffer.prev.next = null;
@@ -4689,13 +4689,13 @@ loop:
 	{
 		viewCount--;
 
-		if(viewsFirst == viewsLast)
+		if(viewsFirst.equals(viewsLast))
 		{
 			viewsFirst = viewsLast = null;
 			return;
 		}
 
-		if(view == viewsFirst)
+		if(view.equals(viewsFirst))
 		{
 			viewsFirst = view.next;
 			view.next.prev = null;
@@ -4705,7 +4705,7 @@ loop:
 			view.prev.next = view.next;
 		}
 
-		if(view == viewsLast)
+		if(view.equals(viewsLast))
 		{
 			viewsLast = viewsLast.prev;
 			view.prev.next = null;
@@ -4724,7 +4724,7 @@ loop:
 	{
 		PerspectiveManager.setPerspectiveDirty(true);
 
-		if(viewsFirst == viewsLast && callExit)
+		if(viewsFirst.equals(viewsLast) && callExit)
 		{
 			exit(view,false); /* exit does editor event & save */
 			// Coming here means the request has been canceled.
@@ -4756,7 +4756,7 @@ loop:
 			view.dispose();
 			removeViewFromList(view);
 
-			if(view == activeView)
+			if(view.equals(activeView))
 				activeView = null;
 
 			return true;

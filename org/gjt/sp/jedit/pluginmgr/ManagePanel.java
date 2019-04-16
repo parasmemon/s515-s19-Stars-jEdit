@@ -1289,7 +1289,7 @@ public class ManagePanel extends JPanel
 		@Override
 		public void mouseClicked(MouseEvent evt)
 		{
-			if (evt.getSource() == table.getTableHeader())
+			if (evt.getSource().equals(table.getTableHeader()))
 			{
 				int column = table.getTableHeader().columnAtPoint(evt.getPoint());
 				pluginModel.sortDirection *= -1;

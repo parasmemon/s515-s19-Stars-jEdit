@@ -391,7 +391,7 @@ loop:		for(int i = 0; i < str.length(); i++)
 	 */
 	public static int compareStrings(String str1, String str2, boolean ignoreCase)
 	{
-		if (str1  == str2)
+		if (str1.equals(str2))
 		{
 			return 0;
 		}
@@ -589,7 +589,7 @@ loop:		for(int i = 0; i < str.length(); i++)
 					state.push(GROUP);
 				break;
 			case ',':
-				if(!state.isEmpty() && state.peek() == GROUP)
+				if(!state.isEmpty() && state.peek().equals(GROUP))
 					buf.append('|');
 				else
 					buf.append(',');
@@ -598,7 +598,7 @@ loop:		for(int i = 0; i < str.length(); i++)
 				if(!state.isEmpty())
 				{
 					buf.append(')');
-					if(state.pop() == NEG)
+					if(state.pop().equals(NEG))
 						buf.append(".*");
 				}
 				else

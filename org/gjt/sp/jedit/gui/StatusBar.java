@@ -333,7 +333,7 @@ public class StatusBar extends JPanel
 	{
 		currentMessageIsIO = false;
 
-		if (comp == null || messageComp == comp)
+		if (comp == null || messageComp.equals(comp))
 		{
 			return;
 		}
@@ -352,7 +352,7 @@ public class StatusBar extends JPanel
 
 			if(!buffer.isLoaded() ||
 				/* can happen when switching buffers sometimes */
-				buffer != view.getTextArea().getBuffer())
+                    !buffer.equals(view.getTextArea().getBuffer()))
 			{
 				caretStatus.setText(" ");
 				return;
@@ -539,7 +539,7 @@ public class StatusBar extends JPanel
 		public void mouseClicked(MouseEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == caretStatus && evt.getClickCount() == 2)
+			if(source.equals(caretStatus) && evt.getClickCount() == 2)
 			{
 				view.getTextArea().showGoToLineDialog();
 			}

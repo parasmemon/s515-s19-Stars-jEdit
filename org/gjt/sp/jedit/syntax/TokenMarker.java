@@ -967,7 +967,7 @@ unwind:		while(context.parent != null)
 			if(obj instanceof LineContext)
 			{
 				LineContext lc = (LineContext)obj;
-				return lc.inRule == inRule && lc.rules == rules
+				return lc.inRule.equals(inRule) && lc.rules.equals(rules)
 					&& Objects.equals(parent,lc.parent)
 					&& charArraysEqual(spanEndSubst,lc.spanEndSubst)
 					&& Objects.equals(spanEndSubstRegex, lc.spanEndSubstRegex);

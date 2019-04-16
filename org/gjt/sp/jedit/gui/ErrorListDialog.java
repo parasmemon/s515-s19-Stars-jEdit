@@ -224,9 +224,9 @@ public class ErrorListDialog extends EnhancedDialog
 		//{{{ actionPerformed() method
 		public void actionPerformed(ActionEvent evt)
 		{
-			if(evt.getSource() == ok)
+			if(evt.getSource().equals(ok))
 				dispose();
-			else if(evt.getSource() == pluginMgr)
+			else if(evt.getSource().equals(pluginMgr))
 			{
 				PluginManager.showPluginManager(JOptionPane.getFrameForComponent(
 					ErrorListDialog.this));

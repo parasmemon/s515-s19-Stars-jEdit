@@ -2192,7 +2192,7 @@ public class Buffer extends JEditBuffer
 		FoldHandler oldFoldHandler = getFoldHandler();
 		setMode();
 
-		if(getFoldHandler() == oldFoldHandler)
+		if(getFoldHandler().equals(oldFoldHandler))
 		{
 			// on a reload, the fold handler doesn't change, but
 			// we still need to re-collapse folds.

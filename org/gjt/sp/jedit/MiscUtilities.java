@@ -1151,7 +1151,7 @@ public class MiscUtilities
 		VFS v1 = VFSManager.getVFSForPath(p1);
 		VFS v2 = VFSManager.getVFSForPath(p2);
 
-		if(v1 != v2)
+		if(!v1.equals(v2))
 			return false;
 
 		if(p1.endsWith("/") || p1.endsWith(File.separator))

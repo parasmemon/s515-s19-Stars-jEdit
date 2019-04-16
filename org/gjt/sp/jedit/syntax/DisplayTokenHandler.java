@@ -213,7 +213,7 @@ public class DisplayTokenHandler extends DefaultTokenHandler
 	//{{{ canMerge() method
 	private static boolean canMerge(Chunk c1, Chunk c2, Segment lineText)
 	{
-		return c1.style == c2.style
+		return c1.style.equals(c2.style)
 			&& c1.isAccessible() && !c1.isTab(lineText)
 			&& c2.isAccessible() && !c2.isTab(lineText)
 			&& (c1.length + c2.length) <= MAX_CHUNK_LEN;

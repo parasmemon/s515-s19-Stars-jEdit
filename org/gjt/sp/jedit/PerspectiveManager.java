@@ -174,7 +174,7 @@ public class PerspectiveManager
 				// ensures that active view is saved last,
 				// ie created last on next load, ie in front
 				// on next load
-				if(view == jEdit.getActiveView()
+				if(view.equals(jEdit.getActiveView())
 					&& i != views.length - 1)
 				{
 					View last = views[views.length - 1];

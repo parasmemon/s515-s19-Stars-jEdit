@@ -649,7 +649,7 @@ public abstract class XModeHandler extends DefaultHandler
 				{
 					lastDelegateSet = delegateMarker
 						.getRuleSet(delegateSetName);
-					if(delegateMarker == marker
+					if(delegateMarker.equals(marker)
 						&& lastDelegateSet == null)
 					{
 						// stupid hack to handle referencing

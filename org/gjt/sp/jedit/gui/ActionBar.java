@@ -265,7 +265,7 @@ public class ActionBar extends JToolBar
 	{
 		public void actionPerformed(ActionEvent evt)
 		{
-			if(evt.getSource() == close)
+			if(evt.getSource().equals(close))
 				view.removeToolBar(ActionBar.this);
 			else
 				invoke();

@@ -579,7 +579,7 @@ class BrowserView extends JPanel
 		public void mousePressed(MouseEvent evt)
 		{
 			Point p = evt.getPoint();
-			if(evt.getSource() != table)
+			if(!evt.getSource().equals(table))
 			{
 				p.x -= table.getX();
 				p.y -= table.getY();

@@ -252,7 +252,7 @@ class HyperSearchRequest extends Task
 		}
 		int resultCount = 0;
 		JEditTextArea textArea = jEdit.getActiveView().getTextArea();
-		int caretLine = textArea.getBuffer() == buffer ? textArea.getCaretLine() : -1;
+		int caretLine = textArea.getBuffer().equals(buffer) ? textArea.getCaretLine() : -1;
 		try
 		{
 			buffer.readLock();

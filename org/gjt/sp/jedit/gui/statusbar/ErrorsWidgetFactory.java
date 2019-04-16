@@ -331,7 +331,7 @@ public class ErrorsWidgetFactory implements StatusWidgetFactory
 			public void actionPerformed(ActionEvent e)
 			{
 				Object source = e.getSource();
-				if (source == removeThisError)
+				if (source.equals(removeThisError))
 				{
 					Throwable throwable = (Throwable) combo.getSelectedItem();
 					if (throwable != null)
@@ -344,7 +344,7 @@ public class ErrorsWidgetFactory implements StatusWidgetFactory
 						}
 					}
 				}
-				else if (source == removeAllErrors)
+				else if (source.equals(removeAllErrors))
 				{
 					for (Object throwable : throwables)
 					{

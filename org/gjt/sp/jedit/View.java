@@ -712,7 +712,7 @@ public class View extends JFrame implements InputHandlerProvider
 
 			Component left = oldSplitPane.getLeftComponent();
 
-			if(left == oldEditPane)
+			if(left.equals(oldEditPane))
 				oldSplitPane.setLeftComponent(newSplitPane);
 			else
 				oldSplitPane.setRightComponent(newSplitPane);
@@ -762,9 +762,9 @@ public class View extends JFrame implements InputHandlerProvider
 			BufferSet.Scope scope = jEdit.getBufferSetManager().getScope();
 			for(EditPane _editPane: getEditPanes())
 			{
-				if(editPane != _editPane)
+				if(!editPane.equals(_editPane))
 				{
-					if (scope == BufferSet.Scope.editpane)
+					if (scope.equals(BufferSet.Scope.editpane))
 						mergeBufferSets(editPane, _editPane);
 					_editPane.close();
 				}
@@ -807,9 +807,9 @@ public class View extends JFrame implements InputHandlerProvider
 			for(EditPane _editPane: getEditPanes())
 			{
 				if(GenericGUIUtilities.isAncestorOf(comp,_editPane)
-					&& _editPane != editPane)
+					&& !_editPane.equals(editPane))
 				{
-					if (scope == BufferSet.Scope.editpane)
+					if (scope.equals(BufferSet.Scope.editpane))
 						mergeBufferSets(editPane, _editPane);
 					_editPane.close();
 				}
@@ -821,7 +821,7 @@ public class View extends JFrame implements InputHandlerProvider
 			{
 				JSplitPane parentSplit = (JSplitPane)parent;
 				int pos = parentSplit.getDividerLocation();
-				if(parentSplit.getLeftComponent() == comp)
+				if(parentSplit.getLeftComponent().equals(comp))
 					parentSplit.setLeftComponent(editPane);
 				else
 					parentSplit.setRightComponent(editPane);
@@ -909,7 +909,7 @@ public class View extends JFrame implements InputHandlerProvider
 		EditPane[] editPanes = getEditPanes();
 		for(int i = 0; i < editPanes.length; i++)
 		{
-			if(editPane == editPanes[i])
+			if(editPane.equals(editPanes[i]))
 			{
 				if(i == editPanes.length - 1)
 					editPanes[0].focusOnTextArea();
@@ -930,7 +930,7 @@ public class View extends JFrame implements InputHandlerProvider
 		EditPane[] editPanes = getEditPanes();
 		for(int i = 0; i < editPanes.length; i++)
 		{
-			if(editPane == editPanes[i])
+			if(editPane.equals(editPanes[i]))
 			{
 				if(i == 0)
 					editPanes[editPanes.length - 1].focusOnTextArea();
@@ -989,7 +989,7 @@ public class View extends JFrame implements InputHandlerProvider
 			Collections.addAll(retval, bs.getAllBuffers());
 			// If scope is not editpane, then all buffersets
 			// are the same and we got what we need.
-			if (mgr.getScope() != BufferSet.Scope.editpane)
+			if (!mgr.getScope().equals(BufferSet.Scope.editpane))
 				break;
 		}
 		Buffer[] bufs = new Buffer[retval.size()];
@@ -1211,7 +1211,7 @@ public class View extends JFrame implements InputHandlerProvider
 	public String toString()
 	{
 		return getClass().getName() + '['
-			+ (jEdit.getActiveView() == this
+			+ (jEdit.getActiveView().equals(this)
 			? "active" : "inactive")
 			+ ']';
 	} //}}}
@@ -1434,7 +1434,7 @@ public class View extends JFrame implements InputHandlerProvider
 		{
 			boolean showStatus = plainView ? jEdit.getBooleanProperty("view.status.plainview.visible") :
 				jEdit.getBooleanProperty("view.status.visible");
-			if (menuBar != null && getJMenuBar() != menuBar)
+			if (menuBar != null && !getJMenuBar().equals(menuBar))
 				setJMenuBar(menuBar);
 			boolean alternateLayout = jEdit.getBooleanProperty(
 				"view.toolbar.alternateLayout");
@@ -1472,7 +1472,7 @@ public class View extends JFrame implements InputHandlerProvider
 		Set<Buffer> checkingBuffers = getOpenBuffers();
 		for (View view: jEdit.getViews())
 		{
-			if (view != this)
+			if (!view.equals(this))
 			{
 				checkingBuffers.removeAll(
 					view.getOpenBuffers());
@@ -1612,7 +1612,7 @@ public class View extends JFrame implements InputHandlerProvider
 	//{{{ showBuffer() method
 	private EditPane showBuffer(Buffer buffer, boolean focus)
 	{
-		if(editPane.getBuffer() == buffer
+		if(editPane.getBuffer().equals(buffer)
 			&& editPane.getTextArea().getVisibleLines() > 1)
 		{
 			if (focus)
@@ -1623,7 +1623,7 @@ public class View extends JFrame implements InputHandlerProvider
 		EditPane[] editPanes = getEditPanes();
 		for (EditPane ep : editPanes)
 		{
-			if (ep.getBuffer() == buffer
+			if (ep.getBuffer().equals(buffer)
 				/* ignore zero-height splits, etc */
 				&& ep.getTextArea().getVisibleLines() > 1)
 			{
@@ -2039,13 +2039,13 @@ loop:		while (true)
 	public void handleBufferUpdate(BufferUpdate msg)
 	{
 		Buffer buffer = msg.getBuffer();
-		if(msg.getWhat() == BufferUpdate.DIRTY_CHANGED
-			|| msg.getWhat() == BufferUpdate.LOADED)
+		if(msg.getWhat().equals(BufferUpdate.DIRTY_CHANGED)
+			|| msg.getWhat().equals(BufferUpdate.LOADED))
 		{
 			EditPane[] editPanes = getEditPanes();
 			for (EditPane ep : editPanes)
 			{
-				if (ep.getBuffer() == buffer)
+				if (ep.getBuffer().equals(buffer))
 				{
 					updateTitle();
 					break;
@@ -2060,8 +2060,8 @@ loop:		while (true)
 	{
 		EditPane editPane = msg.getEditPane();
 		if(editPane !=  null &&
-			editPane.getView() == this
-			&& msg.getWhat() == EditPaneUpdate.BUFFER_CHANGED
+                editPane.getView().equals(this)
+			&& msg.getWhat().equals(EditPaneUpdate.BUFFER_CHANGED)
 			&& editPane.getBuffer().isLoaded())
 		{
 			closeDuplicateBuffers(msg);
@@ -2076,16 +2076,16 @@ loop:		while (true)
 	public void handleViewUpdate(ViewUpdate msg)
 	{
 		// only have my view handle each update message
-		if (msg.getView() == null || msg.getView() != this) return;
+		if (msg.getView() == null || !msg.getView().equals(this)) return;
 		final int check = jEdit.getIntegerProperty("checkFileStatus");
 		if ((check == 0) || !jEdit.isStartupDone()) return;
 		// "buffer visit" also includes checking the buffer when you change editpanes.
 		// "buffer visit" also includes checking the buffer when you activate view, coming from
 		// another program, which could have alterered file on disk.
-		if ((msg.getWhat() == ViewUpdate.EDIT_PANE_CHANGED || msg.getWhat() == ViewUpdate.ACTIVATED) &&
+		if ((msg.getWhat().equals(ViewUpdate.EDIT_PANE_CHANGED) || msg.getWhat().equals(ViewUpdate.ACTIVATED)) &&
 			((check & GeneralOptionPane.checkFileStatus_focusBuffer) > 0))
 			jEdit.checkBufferStatus(View.this, true);
-		else if ((msg.getWhat() == ViewUpdate.ACTIVATED) &&
+		else if ((msg.getWhat().equals(ViewUpdate.ACTIVATED)) &&
 			(check & GeneralOptionPane.checkFileStatus_focus) > 0)
 				jEdit.checkBufferStatus(View.this,
 					(check != GeneralOptionPane.checkFileStatus_focus));
@@ -2098,13 +2098,13 @@ loop:		while (true)
 		if (!jEdit.getBooleanProperty("buffersets.exclusive"))
 			return;
 		final BufferSet.Scope scope = jEdit.getBufferSetManager().getScope();
-		if (scope == BufferSet.Scope.global)
+		if (scope.equals(BufferSet.Scope.global))
 			return;
 		final EditPane ep = epu.getEditPane();
 		/* Only one view needs to handle this message, since
 		   we iterate through all the other views */
 		final View view = ep.getView();
-		if (view != this)
+		if (!view.equals(this))
 			return;
 		final Buffer b = ep.getBuffer();
 		if (b.isDirty()) return;
@@ -2113,8 +2113,8 @@ loop:		while (true)
 			@Override
 			public void visit(EditPane editPane)
 			{
-				if (editPane == ep ||
-					(scope == BufferSet.Scope.view && editPane.getView() == view))
+				if (editPane.equals(ep) ||
+					(scope.equals(BufferSet.Scope.view) && editPane.getView().equals(view)))
 					return;
 				if (editPane.getBufferSet().indexOf(b) < 0)
 					return;
@@ -2174,7 +2174,7 @@ loop:		while (true)
 		@Override
 		public void caretUpdate(CaretEvent evt)
 		{
-			if(evt.getSource() == getTextArea())
+			if(evt.getSource().equals(getTextArea()))
 				status.updateCaretStatus();
 		}
 	} //}}}
@@ -2195,7 +2195,7 @@ loop:		while (true)
 				comp = comp.getParent();
 			}
 
-			if(comp != editPane)
+			if(!comp.equals(editPane))
 				setEditPane((EditPane)comp);
 			else
 				updateGutterBorders();
@@ -2208,7 +2208,7 @@ loop:		while (true)
 		@Override
 		public void scrolledVertically(TextArea textArea)
 		{
-			if(getTextArea() == textArea)
+			if(getTextArea().equals(textArea))
 				status.updateCaretStatus();
 		}
 
@@ -2226,7 +2226,7 @@ loop:		while (true)
 			boolean viewChanged = false;
 			View oldView = jEdit.getActiveViewInternal();
 			// check if view is changed
-			if (oldView != View.this) viewChanged = true;
+			if (!oldView.equals(View.this)) viewChanged = true;
 			/* ACTIVATED currently means whenever the View gets focus.
 			Ideally it should be only when the View changes or we are
 			focusing on a View after previously using in another application.

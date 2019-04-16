@@ -627,7 +627,7 @@ public class BshClassManager
             SignatureKey target = (SignatureKey)o;
             if ( types == null )
                 return target.types == null;
-            if ( clas != target.clas )
+            if (!clas.equals(target.clas))
                 return false;
             if ( !methodName.equals( target.methodName ) )
                 return false;

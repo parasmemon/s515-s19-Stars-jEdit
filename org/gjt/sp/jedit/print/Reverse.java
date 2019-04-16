@@ -41,7 +41,7 @@ public class Reverse implements DocAttribute, PrintRequestAttribute, PrintJobAtt
 
     public boolean equals( Object object )
     {
-        return object != null && object instanceof Reverse && object.getClass() == this.getClass();
+        return object != null && object instanceof Reverse && object.getClass().equals(this.getClass());
     }
 
     public final Class< ?  extends Attribute> getCategory()

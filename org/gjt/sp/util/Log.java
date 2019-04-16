@@ -119,7 +119,7 @@ public class Log
 	 */
 	public static void init(boolean stdio, int level)
 	{
-		if(stdio && System.out == realOut && System.err == realErr)
+		if(stdio && System.out.equals(realOut) && System.err.equals(realErr))
 		{
 			System.setOut(createPrintStream(NOTICE,null));
 			System.setErr(createPrintStream(ERROR,null));

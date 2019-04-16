@@ -84,7 +84,7 @@ public class DefaultInputHandler extends InputHandler
 	@Override
 	public boolean isPrefixActive()
 	{
-		return bindings != currentBindings
+		return !bindings.equals(currentBindings)
 			|| super.isPrefixActive();
 	} //}}}
 
@@ -152,7 +152,7 @@ public class DefaultInputHandler extends InputHandler
 				// key we don't know about unless a
 				// prefix is active. Otherwise it will
 				// beep when caps lock is pressed, etc.
-				if(currentBindings != bindings)
+				if(!currentBindings.equals(bindings))
 				{
 					javax.swing.UIManager.getLookAndFeel().provideErrorFeedback(null); 
 					// F10 should be passed on, but C+e F10

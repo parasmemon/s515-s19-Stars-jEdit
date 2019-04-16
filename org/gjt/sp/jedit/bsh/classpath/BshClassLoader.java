@@ -147,7 +147,7 @@ public class BshClassLoader extends URLClassLoader
         Class c;
 
         // If there is a designated loader and it's not us delegate to it
-        if ( cl != null && cl != this )
+        if ( cl != null && !cl.equals(this))
             try {
                 return cl.loadClass( name );
             } catch ( ClassNotFoundException e ) {
@@ -168,7 +168,7 @@ public class BshClassLoader extends URLClassLoader
         // If there is a baseLoader and it's not us delegate to it
         cl = bcm.getBaseLoader();
 
-        if ( cl != null && cl != this )
+        if ( cl != null && !cl.equals(this))
             try {
                 return cl.loadClass( name );
             } catch ( ClassNotFoundException e ) { }

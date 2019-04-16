@@ -272,7 +272,7 @@ public class ActionSet extends JEditActionSet<EditAction> implements Comparable
 		LinkedList<String> retVal = new LinkedList<String>();
 		for (Object obj : actions.values())
 		{
-			if(obj == placeholder)
+			if(obj.equals(placeholder))
 			{
 				// ??? this should only be called with
 				// fully loaded action set

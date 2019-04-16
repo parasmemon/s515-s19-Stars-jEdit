@@ -429,9 +429,9 @@ public class VFSFileChooserDialog extends EnhancedDialog
 	{
 		public void actionPerformed(ActionEvent evt)
 		{
-			if(evt.getSource() == ok)
+			if(evt.getSource().equals(ok))
 				ok();
-			else if(evt.getSource() == cancel)
+			else if(evt.getSource().equals(cancel))
 				cancel();
 		}
 	} //}}}

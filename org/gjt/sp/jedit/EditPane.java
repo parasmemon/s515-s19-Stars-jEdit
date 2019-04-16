@@ -151,7 +151,7 @@ public class EditPane extends JPanel implements BufferSetListener
 		if(buffer == null)
 			throw new NullPointerException("The buffer cannot be null");
 
-		if(this.buffer == buffer)
+		if(this.buffer.equals(buffer))
 			return;
 
 		if (bufferSet.indexOf(buffer) == -1)
@@ -180,7 +180,7 @@ public class EditPane extends JPanel implements BufferSetListener
 
 			if(bufferSwitcher != null)
 			{
-				if(bufferSwitcher.getSelectedItem() != buffer)
+				if(!bufferSwitcher.getSelectedItem().equals(buffer))
 					bufferSwitcher.setSelectedItem(buffer);
 				bufferSwitcher.updateStyle(buffer);
 			}
@@ -196,7 +196,7 @@ public class EditPane extends JPanel implements BufferSetListener
 				public void run()
 				{
 					// only do this if we are the current edit pane
-					if(view.getEditPane() == EditPane.this
+					if(view.getEditPane().equals(EditPane.this)
 						&& (bufferSwitcher == null
 						|| !bufferSwitcher.isPopupVisible()))
 					{
@@ -216,7 +216,7 @@ public class EditPane extends JPanel implements BufferSetListener
 				{
 					// avoid a race condition
 					// see bug #834338
-					if(buffer == getBuffer())
+					if(buffer.equals(getBuffer()))
 						loadCaretInfo();
 					// This must happen after loadCaretInfo.
 					// Otherwise caret is not restored properly.
@@ -711,7 +711,7 @@ public class EditPane extends JPanel implements BufferSetListener
 			// the buffer was a new file so I do not need to keep it's informations
 			caretsForPath.remove(buffer.getPath());
 		}
-		if (buffer == this.buffer)
+		if (buffer.equals(this.buffer))
 		{
 			// The closed buffer is the current buffer
 			Buffer newBuffer = recentBuffer != null ?
@@ -731,7 +731,7 @@ public class EditPane extends JPanel implements BufferSetListener
 				recentBuffer = null;
 			}
 		}
-		if(buffer == recentBuffer)
+		if(buffer.equals(recentBuffer))
 			recentBuffer = null;
 		if (bufferSwitcher != null)
 			bufferSwitcher.updateBufferList();
@@ -767,7 +767,7 @@ public class EditPane extends JPanel implements BufferSetListener
 	public String toString()
 	{
 		return getClass().getName() + '['
-			+ (view.getEditPane() == this
+			+ (view.getEditPane().equals(this)
 			? "active]" : "inactive]");
 	} //}}}
 
@@ -1083,7 +1083,7 @@ public class EditPane extends JPanel implements BufferSetListener
 	public void handleBufferUpdate(BufferUpdate msg)
 	{
 		Buffer _buffer = msg.getBuffer();
-		if(msg.getWhat() == BufferUpdate.CREATED)
+		if(msg.getWhat().equals(BufferUpdate.CREATED))
 		{
 			if(bufferSwitcher != null)
 				bufferSwitcher.updateBufferList();
@@ -1099,12 +1099,12 @@ public class EditPane extends JPanel implements BufferSetListener
 				recentBuffer = null;
 			}
 		}
-		else if(msg.getWhat() == BufferUpdate.CLOSED)
+		else if(msg.getWhat().equals(BufferUpdate.CLOSED))
 		{
 			if(bufferSwitcher != null)
 				bufferSwitcher.updateBufferList();
 
-			if(_buffer == buffer)
+			if(_buffer.equals(buffer))
 			{
 				// The closed buffer is the current buffer
 				Buffer newBuffer = recentBuffer != null ?
@@ -1116,7 +1116,7 @@ public class EditPane extends JPanel implements BufferSetListener
 					recentBuffer = newBuffer.getPrev();
 				}
 			}
-			else if(_buffer == recentBuffer)
+			else if(_buffer.equals(recentBuffer))
 				recentBuffer = null;
 
 			Buffer closedBuffer = msg.getBuffer();
@@ -1126,23 +1126,23 @@ public class EditPane extends JPanel implements BufferSetListener
 				caretsForPath.remove(closedBuffer.getPath());
 			}
 		}
-		else if(msg.getWhat() == BufferUpdate.LOAD_STARTED)
+		else if(msg.getWhat().equals(BufferUpdate.LOAD_STARTED))
 		{
-			if(_buffer == buffer)
+			if(_buffer.equals(buffer))
 			{
 				textArea.setCaretPosition(0);
 				textArea.getPainter().repaint();
 			}
 		}
-		else if(msg.getWhat() == BufferUpdate.LOADED)
+		else if(msg.getWhat().equals(BufferUpdate.LOADED))
 		{
-			if(_buffer == buffer)
+			if(_buffer.equals(buffer))
 			{
 				textArea.repaint();
 				if(bufferSwitcher != null)
 					bufferSwitcher.updateBufferList();
 
-				if(view.getEditPane() == this)
+				if(view.getEditPane().equals(this))
 				{
 					StatusBar status = view.getStatus();
 					status.updateCaretStatus();
@@ -1154,9 +1154,9 @@ public class EditPane extends JPanel implements BufferSetListener
 			}
 
 		}
-		else if(msg.getWhat() == BufferUpdate.DIRTY_CHANGED)
+		else if(msg.getWhat().equals(BufferUpdate.DIRTY_CHANGED))
 		{
-			if(_buffer == buffer && bufferSwitcher != null)
+			if(_buffer.equals(buffer) && bufferSwitcher != null)
 			{
 				if(buffer.isDirty())
 					bufferSwitcher.repaint();
@@ -1164,21 +1164,21 @@ public class EditPane extends JPanel implements BufferSetListener
 					bufferSwitcher.updateBufferList();
 			}
 		}
-		else if(msg.getWhat() == BufferUpdate.MARKERS_CHANGED)
+		else if(msg.getWhat().equals(BufferUpdate.MARKERS_CHANGED))
 		{
-			if(_buffer == buffer)
+			if(_buffer.equals(buffer))
 				textArea.getGutter().repaint();
 		}
-		else if(msg.getWhat() == BufferUpdate.PROPERTIES_CHANGED)
+		else if(msg.getWhat().equals(BufferUpdate.PROPERTIES_CHANGED))
 		{
-			if(_buffer == buffer && buffer.isLoaded())
+			if(_buffer.equals(buffer) && buffer.isLoaded())
 			{
 				textArea.propertiesChanged();
-				if(view.getEditPane() == this)
+				if(view.getEditPane().equals(this))
 					view.getStatus().updateBufferStatus();
 			}
 		}
-		else if(msg.getWhat() == BufferUpdate.SAVED && _buffer == buffer)
+		else if(msg.getWhat().equals(BufferUpdate.SAVED) && _buffer.equals(buffer))
 		{
 			textArea.propertiesChanged();
 		}

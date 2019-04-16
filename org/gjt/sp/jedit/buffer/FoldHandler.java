@@ -102,7 +102,7 @@ public abstract class FoldHandler
 		if(o == null)
 			return false;
 		else
-			return getClass() == o.getClass();
+			return getClass().equals(o.getClass());
 	} //}}}
 
 	//{{{ hashCode() method

@@ -344,7 +344,7 @@ public class PluginManager extends JFrame
 	private void pluginListUpdated()
 	{
 		Component selected = tabPane.getSelectedComponent();
-		if(selected == installer || selected == updater)
+		if(selected.equals(installer) || selected.equals(updater))
 		{
 			installer.updateModel();
 			updater.updateModel();
@@ -376,11 +376,11 @@ public class PluginManager extends JFrame
 			// TODO: update this, use CombinedOptins instead of GlobalOptions
 			// and PluginOptions
 			Object source = evt.getSource();
-			if(source == done)
+			if(source.equals(done))
 				ok();
-			else if (source == mgrOptions)
+			else if (source.equals(mgrOptions))
 				new GlobalOptions(PluginManager.this,"plugin-manager");
-			else if (source == pluginOptions)
+			else if (source.equals(pluginOptions))
 				new PluginOptions(PluginManager.this);
 		}
 	} //}}}
@@ -391,11 +391,11 @@ public class PluginManager extends JFrame
 		public void stateChanged(ChangeEvent e)
 		{
 			Component selected = tabPane.getSelectedComponent();
-			if(selected == installer || selected == updater)
+			if(selected.equals(installer) || selected.equals(updater))
 			{
 				updatePluginList();
 			}
-			else if(selected == manager)
+			else if(selected.equals(manager))
 				manager.update();
 		}
 	} //}}}

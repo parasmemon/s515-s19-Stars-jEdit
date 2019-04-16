@@ -161,7 +161,7 @@ public class CloseDialog extends EnhancedDialog
 		public void actionPerformed(ActionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == selectAll)
+			if(source.equals(selectAll))
 			{
 				// I'm too tired to think of a better way
 				// to handle this right now.
@@ -178,7 +178,7 @@ public class CloseDialog extends EnhancedDialog
 				}
 				bufferList.requestFocus();
 			}
-			else if(source == save)
+			else if(source.equals(save))
 			{
 				java.util.List<String> paths = bufferList.getSelectedValuesList();
 
@@ -203,7 +203,7 @@ public class CloseDialog extends EnhancedDialog
 					bufferList.requestFocus();
 				}
 			}
-			else if(source == discard)
+			else if(source.equals(discard))
 			{
 				java.util.List<String> paths = bufferList.getSelectedValuesList();
 
@@ -225,7 +225,7 @@ public class CloseDialog extends EnhancedDialog
 					bufferList.requestFocus();
 				}
 			}
-			else if(source == cancel)
+			else if(source.equals(cancel))
 				cancel();
 		}
 	} //}}}

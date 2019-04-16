@@ -155,17 +155,17 @@ public class BrowserColorsOptionPane extends AbstractOptionPane
 		public void actionPerformed(ActionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == add)
+			if(source.equals(add))
 			{
 				colorsModel.add();
 			}
-			else if(source == remove)
+			else if(source.equals(remove))
 			{
 				int selectedRow = colorsTable.getSelectedRow();
 				colorsModel.remove(selectedRow);
 				updateEnabled();
 			}
-			else if(source == moveUp)
+			else if(source.equals(moveUp))
 			{
 				int selectedRow = colorsTable.getSelectedRow();
 				if(selectedRow != 0)
@@ -175,7 +175,7 @@ public class BrowserColorsOptionPane extends AbstractOptionPane
 				}
 				updateEnabled();
 			}
-			else if(source == moveDown)
+			else if(source.equals(moveDown))
 			{
 				int selectedRow = colorsTable.getSelectedRow();
 				if(selectedRow != colorsTable.getRowCount() - 1)

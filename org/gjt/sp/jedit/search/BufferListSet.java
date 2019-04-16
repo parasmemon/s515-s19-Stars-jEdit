@@ -136,7 +136,7 @@ public abstract class BufferListSet implements SearchFileSet
 				}
 			}
 
-			if (direction == Direction.NEXT)
+			if (direction.equals(Direction.NEXT))
 			{
 				return getFirstFile(view);
 			}
@@ -152,14 +152,14 @@ public abstract class BufferListSet implements SearchFileSet
 			boolean ignoreCase = ((vfs.getCapabilities()
 				& VFS.CASE_INSENSITIVE_CAP) != 0);
 			
-			if (direction == Direction.NEXT &&
+			if (direction.equals(Direction.NEXT) &&
 				StandardUtilities.compareStrings(files[files.length - 1],
 					path, ignoreCase) == 0)
 			{
 				// Going forward and already at the last file
 				return null;
 			}
-			else if (direction == Direction.PREV &&
+			else if (direction.equals(Direction.PREV) &&
 				StandardUtilities.compareStrings(files[0], path, ignoreCase) == 0)
 			{
 				// Going backward and already at the first file
@@ -171,7 +171,7 @@ public abstract class BufferListSet implements SearchFileSet
 				if(StandardUtilities.compareStrings(
 					files[i],path,ignoreCase) == 0)
 				{
-					if (direction == Direction.NEXT)
+					if (direction.equals(Direction.NEXT))
 						return files[i + 1];
 					else
 					{

@@ -82,7 +82,7 @@ class TextAreaDropHandler extends DropTargetAdapter
 	{
 		Log.log(Log.DEBUG,this,"Drag exit");
 		//textArea.getBuffer().endCompoundEdit();
-		if(textArea.getBuffer() == savedBuffer)
+		if(textArea.getBuffer().equals(savedBuffer))
 		{
 			textArea.moveCaretPosition(savedCaret,
 				TextArea.ELECTRIC_SCROLL);

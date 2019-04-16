@@ -1392,7 +1392,7 @@ loop:		for(int i = 0; i < seg.count; i++)
 		int lineCount = lineMgr.getLineCount();
 		if(lineCount - 1 == lineIndex)
 			lineMgr.setFirstInvalidLineContext(-1);
-		else if(oldContext != context)
+		else if(!oldContext.equals(context))
 			lineMgr.setFirstInvalidLineContext(lineIndex + 1);
 		else if(firstInvalidLineContext != -1)
 		{
@@ -1415,7 +1415,7 @@ loop:		for(int i = 0; i < seg.count; i++)
 		this.tokenMarker = tokenMarker;
 
 		// don't do this on initial token marker
-		if(oldTokenMarker != null && tokenMarker != oldTokenMarker)
+		if(oldTokenMarker != null && !tokenMarker.equals(oldTokenMarker))
 		{
 			lineMgr.setFirstInvalidLineContext(0);
 		}
@@ -2344,7 +2344,7 @@ loop:		for(int i = 0; i < seg.count; i++)
 	{
 		for(int i = 0; i < bufferListeners.size(); i++)
 		{
-			if(bufferListeners.get(i).listener == listener)
+			if(bufferListeners.get(i).listener.equals(listener))
 			{
 				bufferListeners.remove(i);
 				return;

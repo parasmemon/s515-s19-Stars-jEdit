@@ -95,7 +95,7 @@ public class ToolBarManager
 	{
 		for(int i = 0; i < toolbars.size(); i++)
 		{
-			if(toolbar == toolbars.get(i).toolbar)
+			if(toolbar.equals(toolbars.get(i).toolbar))
 			{
 				group.remove(toolbar);
 				toolbars.remove(i);

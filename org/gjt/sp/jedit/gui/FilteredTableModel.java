@@ -104,7 +104,7 @@ public abstract class FilteredTableModel<E extends TableModel> extends AbstractT
 	 */
 	public void setTable(JTable table)
 	{
-		if (table.getModel() != this)
+		if (!table.getModel().equals(this))
 			throw new IllegalArgumentException("The given table " + table + " doesn't use this model " + this);
 		this.table = table;
 	} //}}}

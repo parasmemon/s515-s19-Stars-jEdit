@@ -252,7 +252,7 @@ class BSHAllocationExpression extends SimpleNode
 			are contained in the node.
 		*/
         Object result = dimensionsNode.eval( type, callstack, interpreter );
-        if ( result != Primitive.VOID )
+        if (!result.equals(Primitive.VOID))
             return result;
 		else
 			return arrayNewInstance( type, dimensionsNode, callstack );

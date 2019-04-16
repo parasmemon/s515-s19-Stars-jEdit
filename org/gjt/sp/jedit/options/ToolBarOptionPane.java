@@ -330,7 +330,7 @@ public class ToolBarOptionPane extends AbstractOptionPane
 		{
 			Object source = evt.getSource();
 
-			if(source == add)
+			if(source.equals(add))
 			{
 				ToolBarEditDialog dialog = new ToolBarEditDialog(
 					ToolBarOptionPane.this, iconList, null);
@@ -348,7 +348,7 @@ public class ToolBarOptionPane extends AbstractOptionPane
 				list.setSelectedIndex(index);
 				list.ensureIndexIsVisible(index);
 			}
-			else if(source == remove)
+			else if(source.equals(remove))
 			{
 				int index = list.getSelectedIndex();
 				listModel.removeElementAt(index);
@@ -361,7 +361,7 @@ public class ToolBarOptionPane extends AbstractOptionPane
 				}
 				updateButtons();
 			}
-			else if(source == moveUp)
+			else if(source.equals(moveUp))
 			{
 				int index = list.getSelectedIndex();
 				Button selected = (Button)list.getSelectedValue();
@@ -370,7 +370,7 @@ public class ToolBarOptionPane extends AbstractOptionPane
 				list.setSelectedIndex(index-1);
 				list.ensureIndexIsVisible(index-1);
 			}
-			else if(source == moveDown)
+			else if(source.equals(moveDown))
 			{
 				int index = list.getSelectedIndex();
 				Button selected = (Button)list.getSelectedValue();
@@ -379,7 +379,7 @@ public class ToolBarOptionPane extends AbstractOptionPane
 				list.setSelectedIndex(index+1);
 				list.ensureIndexIsVisible(index+1);
 			}
-			else if(source == edit)
+			else if(source.equals(edit))
 			{
 				ToolBarEditDialog dialog = new ToolBarEditDialog(
 					ToolBarOptionPane.this, iconList,
@@ -394,7 +394,7 @@ public class ToolBarOptionPane extends AbstractOptionPane
 				list.setSelectedIndex(index);
 				list.ensureIndexIsVisible(index);
 			}
-			else if(source == reset)
+			else if(source.equals(reset))
 			{
 				String dialogType = "options.toolbar.reset.dialog";
 				int result = GUIUtilities.confirm(list,dialogType,null,
@@ -733,13 +733,13 @@ class ToolBarEditDialog extends EnhancedDialog
 			Object source = evt.getSource();
 			if(source instanceof JRadioButton)
 				updateEnabled();
-			if(source == ok)
+			if(source.equals(ok))
 				ok();
-			else if(source == cancel)
+			else if(source.equals(cancel))
 				cancel();
-			else if(source == combo)
+			else if(source.equals(combo))
 				updateList();
-			else if(source == fileButton)
+			else if(source.equals(fileButton))
 			{
 				String directory;
 				if(fileIcon == null)

@@ -349,9 +349,9 @@ public class FontSelectorDialog extends EnhancedDialog
 	{
 		public void actionPerformed(ActionEvent evt)
 		{
-			if(evt.getSource() == ok)
+			if(evt.getSource().equals(ok))
 				ok();
-			else if(evt.getSource() == cancel)
+			else if(evt.getSource().equals(cancel))
 				cancel();
 		}
 	} //}}}
@@ -362,19 +362,19 @@ public class FontSelectorDialog extends EnhancedDialog
 		public void valueChanged(ListSelectionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == familyList)
+			if(source.equals(familyList))
 			{
 				String family = (String)familyList.getSelectedValue();
 				if(family != null)
 					familyField.setText(family);
 			}
-			else if(source == sizeList)
+			else if(source.equals(sizeList))
 			{
 				String size = (String)sizeList.getSelectedValue();
 				if(size != null)
 					sizeField.setText(size);
 			}
-			else if(source == styleList)
+			else if(source.equals(styleList))
 			{
 				String style = (String)styleList.getSelectedValue();
 				if(style != null)

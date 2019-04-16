@@ -83,7 +83,7 @@ class BSHArrayInitializer extends SimpleNode
 			} else
             	currentInitializer = node.eval( callstack, interpreter);
 
-			if ( currentInitializer == Primitive.VOID )
+			if (currentInitializer.equals(Primitive.VOID))
 				throw new EvalError(
 					"Void in array initializer, position"+i, this, callstack );
 

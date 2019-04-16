@@ -1019,11 +1019,11 @@ public class SearchDialog extends EnhancedDialog
 		{
 			Object source = evt.getSource();
 
-			if(source == searchCurrentBuffer)
+			if(source.equals(searchCurrentBuffer))
 				hyperSearch.setSelected(false);
-			else if(source == searchSelection
-				|| source == searchAllBuffers
-				|| source == searchDirectory)
+			else if(source.equals(searchSelection)
+				|| source.equals(searchAllBuffers)
+				|| source.equals(searchDirectory))
 				hyperSearch.setSelected(true);
 
 			save(true);
@@ -1039,7 +1039,7 @@ public class SearchDialog extends EnhancedDialog
 			String path = MiscUtilities.expandVariables(directoryField.getText());
 			directoryField.setText(path);
 
-			if(evt.getSource() == choose)
+			if(evt.getSource().equals(choose))
 			{
 				String[] dirs = GUIUtilities.showVFSFileDialog(
 					SearchDialog.this,
@@ -1049,7 +1049,7 @@ public class SearchDialog extends EnhancedDialog
 				if(dirs != null)
 					directoryField.setText(dirs[0]);
 			}
-			else if(evt.getSource() == synchronize)
+			else if(evt.getSource().equals(synchronize))
 			{
 				synchronizeMultiFileSettings();
 			}
@@ -1087,19 +1087,19 @@ public class SearchDialog extends EnhancedDialog
 		{
 			Object source = evt.getSource();
 
-			if(source == closeBtn)
+			if(source.equals(closeBtn))
 				cancel();
-			else if(source == findBtn || source == find
-				|| source == replace)
+			else if(source.equals(findBtn) || source.equals(find)
+				|| source.equals(replace))
 			{
 				ok();
 			}
-			else if (source == replaceBtn)
+			else if (source.equals(replaceBtn))
 			{
 				save(false);
 				SearchAndReplace.replace(view);
 			}
-			else if(source == replaceAndFindBtn)
+			else if(source.equals(replaceAndFindBtn))
 			{
 				save(false);
 				if(SearchAndReplace.replace(view))
@@ -1107,7 +1107,7 @@ public class SearchDialog extends EnhancedDialog
 				else
 					javax.swing.UIManager.getLookAndFeel().provideErrorFeedback(null);
 			}
-			else if(source == replaceAllBtn)
+			else if(source.equals(replaceAllBtn))
 			{
 				if(searchSelection.isSelected() &&
 					view.getTextArea().getSelectionCount()

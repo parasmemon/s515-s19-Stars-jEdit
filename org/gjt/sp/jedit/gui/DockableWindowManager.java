@@ -448,7 +448,7 @@ public abstract class DockableWindowManager extends JPanel
 	@EBHandler
 	public void handleDockableWindowUpdate(DockableWindowUpdate msg)
 	{
-		if(msg.getWhat() == DockableWindowUpdate.PROPERTIES_CHANGED)
+		if(msg.getWhat().equals(DockableWindowUpdate.PROPERTIES_CHANGED))
 			propertiesChanged();
 	} // }}}
 
@@ -463,13 +463,13 @@ public abstract class DockableWindowManager extends JPanel
 	@EBHandler
 	public void handlePluginUpdate(PluginUpdate pmsg)
 	{
-		if (pmsg.getWhat() == PluginUpdate.LOADED)
+		if (pmsg.getWhat().equals(PluginUpdate.LOADED))
 		{
 			Iterator<DockableWindowFactory.Window> iter = factory.getDockableWindowIterator();
 			while (iter.hasNext())
 			{
 				DockableWindowFactory.Window w = iter.next();
-				if (w.plugin == pmsg.getPluginJAR())
+				if (w.plugin.equals(pmsg.getPluginJAR()))
 				{
 					String position = getDockablePosition(w.name);
 					positions.put(w.name, position);
@@ -483,8 +483,8 @@ public abstract class DockableWindowManager extends JPanel
 		{
 			// we don't care
 		}
-		else if(pmsg.getWhat() == PluginUpdate.DEACTIVATED ||
-				pmsg.getWhat() == PluginUpdate.UNLOADED)
+		else if(pmsg.getWhat().equals(PluginUpdate.DEACTIVATED) ||
+                pmsg.getWhat().equals(PluginUpdate.UNLOADED))
 		{
 			Set<String> dockables = plugins.remove(pmsg.getPluginJAR());
 			if (dockables != null)

@@ -374,11 +374,11 @@ public class BufferSwitcher extends JComboBox<Buffer>
 			{
 				case editpane:
 				{
-					return sourceEditPane != targetEditPane;
+					return !sourceEditPane.equals(targetEditPane);
 				}
 				case view:
 				{
-					return sourceView != targetView;
+					return !sourceView.equals(targetView);
 				}
 				case global:
 					return false;

@@ -77,7 +77,7 @@ public class VFSDirectoryEntryTableModel extends AbstractTableModel
 		int startIndex = -1;
 		for(int i = 0; i < files.length; i++)
 		{
-			if(files[i] == entry)
+			if(files[i].equals(entry))
 				startIndex = i;
 		}
 		if (startIndex != -1)
@@ -228,7 +228,7 @@ public class VFSDirectoryEntryTableModel extends AbstractTableModel
 
 		// we don't sort by some attributes
 		String sortBy = getSortAttribute(columnIndex);
-		if(sortBy == VFS.EA_STATUS)
+		if(sortBy.equals(VFS.EA_STATUS))
 			return false;
 
 		Arrays.sort(files, new EntryCompare(sortBy, ascending));
@@ -444,7 +444,7 @@ vfs_attr_loop:	for(int i = 0; i < attrs.length; i++)
 				return compare(entry1.parent, entry2);
 
 			// here we have entries of the same level
-			if(entry1.parent != entry2.parent)
+			if(!entry1.parent.equals(entry2.parent))
 				return compare(entry1.parent, entry2.parent);
 
 			// here we have siblings with the same parents
@@ -462,19 +462,19 @@ vfs_attr_loop:	for(int i = 0; i < attrs.length; i++)
 			int result;
 
 			// if the modified attribute is present, then we have a LocalFile
-			if(sortAttribute == VFS.EA_MODIFIED)
+			if(sortAttribute.equals(VFS.EA_MODIFIED))
 				result = (
 					(Long)file1.getModified())
 					.compareTo(
 					(Long)file2.getModified());
 			// sort by size
-			else if(sortAttribute == VFS.EA_SIZE)
+			else if(sortAttribute.equals(VFS.EA_SIZE))
 				result = (
 					(Long)file1.getLength())
 					.compareTo(
 					(Long)file2.getLength());
 			// sort by type (= extension)
-			else if(sortAttribute == VFS.EA_TYPE)
+			else if(sortAttribute.equals(VFS.EA_TYPE))
 				result = StandardUtilities.compareStrings(
 					entry1.extension,
 					entry2.extension,

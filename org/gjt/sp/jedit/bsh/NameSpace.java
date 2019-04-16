@@ -501,7 +501,7 @@ public class NameSpace
     {
         if ( classManager != null )
             return classManager;
-        if ( parent != null && parent != JAVACODE )
+        if ( parent != null && !parent.equals(JAVACODE))
             return parent.getClassManager();
 
 System.out.println("experiment: creating class manager");
@@ -697,7 +697,7 @@ System.out.println("experiment: creating class manager");
                 // If it had a different type throw error.
                 // This allows declaring the same var again, but not with
                 // a different (even if assignable) type.
-                if ( existing.getType() != type )
+                if (!existing.getType().equals(type))
                 {
                     throw new UtilEvalError( "Typed variable: "+name
                         +" was previously declared with type: "
@@ -1656,7 +1656,7 @@ System.out.println("experiment: creating class manager");
         {
             CommandPathEntry entry = (CommandPathEntry)importedCommands
                 .elementAt(i);
-            if(entry.path.equals(path) && entry.clas == clas)
+            if(entry.path.equals(path) && entry.clas.equals(clas))
             {
                 importedCommands.removeElementAt(i);
                 return;

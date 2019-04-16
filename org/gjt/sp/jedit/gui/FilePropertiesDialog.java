@@ -329,11 +329,11 @@ public class FilePropertiesDialog extends EnhancedDialog
 			Object source = evt.getSource();
 
 
-			if(source == okButton)
+			if(source.equals(okButton))
 			{
 				ok();
 			}
-			else if(source == cancelButton)
+			else if(source.equals(cancelButton))
 			{
 				cancel();
 			}

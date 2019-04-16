@@ -463,20 +463,20 @@ public class GrabKeyDialog extends JDialog
 		@Override
 		public void actionPerformed(ActionEvent evt)
 		{
-			if(evt.getSource() == ok)
+			if(evt.getSource().equals(ok))
 			{
 				if(canClose())
 					dispose();
 			}
-			else if(evt.getSource() == remove)
+			else if(evt.getSource().equals(remove))
 			{
 				shortcut.setText(null);
 				isOK = true;
 				dispose();
 			}
-			else if(evt.getSource() == cancel)
+			else if(evt.getSource().equals(cancel))
 				dispose();
-			else if(evt.getSource() == clear)
+			else if(evt.getSource().equals(clear))
 			{
 				shortcut.setText(null);
 				if(debugBuffer == null)
@@ -510,14 +510,14 @@ public class GrabKeyDialog extends JDialog
 
 			// check whether this shortcut already exists
 			KeyBinding other = getKeyBinding(shortcutString);
-			if(other == null || other == binding)
+			if(other == null || other.equals(binding))
 			{
 				isOK = true;
 				return true;
 			}
 
 			// check whether the other shortcut is the alt. shortcut
-			if(other.name == binding.name)
+			if(other.name.equals(binding.name))
 			{
 				// we don't need two identical shortcuts
 				GUIUtilities.error(GrabKeyDialog.this,

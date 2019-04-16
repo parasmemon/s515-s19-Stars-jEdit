@@ -326,7 +326,7 @@ public abstract class InputHandler extends AbstractInputHandler<EditAction>
 		if(!action.noRememberLast())
 		{
 			HistoryModel.getModel("action").addItem(action.getName());
-			if(lastAction == action)
+			if(lastAction.equals(action))
 				lastActionCount++;
 			else
 			{

@@ -85,7 +85,7 @@ abstract class AbstractBrowserTask extends Task
 		@Override
 		public void done(Task task)
 		{
-			if (task == AbstractBrowserTask.this)
+			if (task.equals(AbstractBrowserTask.this))
 			{
 				TaskManager.instance.removeTaskListener(this);
 				ThreadUtilities.runInDispatchThread(runnable);

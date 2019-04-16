@@ -178,7 +178,7 @@ public abstract class TextAreaInputHandler extends AbstractInputHandler<JEditBea
 		// remember the last executed action
 		if(!action.noRememberLast())
 		{
-			if(lastAction == action)
+			if(lastAction.equals(action))
 				lastActionCount++;
 			else
 			{
@@ -277,7 +277,7 @@ public abstract class TextAreaInputHandler extends AbstractInputHandler<JEditBea
 				// key we don't know about unless a
 				// prefix is active. Otherwise it will
 				// beep when caps lock is pressed, etc.
-				if(currentBindings != bindings)
+				if(!currentBindings.equals(bindings))
 				{
 					javax.swing.UIManager.getLookAndFeel().provideErrorFeedback(null); 
 					// F10 should be passed on, but C+e F10

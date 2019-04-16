@@ -639,7 +639,7 @@ public class VFSDirectoryEntryTable extends JTable
 		public void mouseClicked(MouseEvent evt)
 		{
 			// double click on columns header
-			if (evt.getSource() == header && evt.getClickCount() == 2)
+			if (evt.getSource().equals(header) && evt.getClickCount() == 2)
 			{
 				VFSDirectoryEntryTableModel model = (VFSDirectoryEntryTableModel) header.getTable().getModel();
 				TableColumnModel columnModel = header.getColumnModel();
@@ -843,7 +843,7 @@ public class VFSDirectoryEntryTable extends JTable
 			MouseMotionListener[] listeners = header.getMouseMotionListeners();
 			for (int i = 0; i < listeners.length; i++) {
 				MouseMotionListener l = listeners[i];
-				if (l == this) {
+				if (l.equals(this)) {
 					listeners[i] = mouseMotionDelegate;
 				}
 				header.removeMouseMotionListener(l);
@@ -857,7 +857,7 @@ public class VFSDirectoryEntryTable extends JTable
 			MouseListener[] listeners = header.getMouseListeners();
 			for (int i = 0; i < listeners.length; i++) {
 				MouseListener l = listeners[i];
-				if (l == this) {
+				if (l.equals(this)) {
 					listeners[i] = mouseDelegate;
 				}
 				header.removeMouseListener(l);

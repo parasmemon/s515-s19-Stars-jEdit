@@ -300,15 +300,14 @@ public class TextAreaTransferHandler extends TransferHandler
 		}
 
 		if(dragSource != null
-			&& textArea.getBuffer()
-			== dragSource.getBuffer())
+			&& textArea.getBuffer().equals(dragSource.getBuffer()))
 		{
 			compoundEdit = true;
 			textArea.getBuffer().beginCompoundEdit();
 		}
 		
 		
-		sameTextArea = textArea == dragSource;
+		sameTextArea = textArea.equals(dragSource);
 
 		int caret = textArea.getCaretPosition();
 		Selection s = textArea.getSelectionAtOffset(caret);
@@ -423,7 +422,7 @@ public class TextAreaTransferHandler extends TransferHandler
 	{
 		return ("text".equals(flavor.getPrimaryType()) &&
 			"uri-list".equals(flavor.getSubType()) &&
-			flavor.getRepresentationClass() == String.class);
+                flavor.getRepresentationClass().equals(String.class));
 	} //}}}
 
 	//{{{ canImport() methods

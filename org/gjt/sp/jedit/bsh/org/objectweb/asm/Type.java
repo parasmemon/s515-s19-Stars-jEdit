@@ -239,21 +239,21 @@ public class Type {
 
   public static Type getType (final Class c) {
     if (c.isPrimitive()) {
-      if (c == Integer.TYPE) {
+      if (c.equals(Integer.TYPE)) {
         return INT_TYPE;
-      } else if (c == Void.TYPE) {
+      } else if (c.equals(Void.TYPE)) {
         return VOID_TYPE;
-      } else if (c == Boolean.TYPE) {
+      } else if (c.equals(Boolean.TYPE)) {
         return BOOLEAN_TYPE;
-      } else if (c == Byte.TYPE) {
+      } else if (c.equals(Byte.TYPE)) {
         return BYTE_TYPE;
-      } else if (c == Character.TYPE) {
+      } else if (c.equals(Character.TYPE)) {
         return CHAR_TYPE;
-      } else if (c == Short.TYPE) {
+      } else if (c.equals(Short.TYPE)) {
         return SHORT_TYPE;
-      } else if (c == Double.TYPE) {
+      } else if (c.equals(Double.TYPE)) {
         return DOUBLE_TYPE;
-      } else if (c == Float.TYPE) {
+      } else if (c.equals(Float.TYPE)) {
         return FLOAT_TYPE;
       } else /*if (c == Long.TYPE)*/ {
         return LONG_TYPE;
@@ -578,21 +578,21 @@ public class Type {
     while (true) {
       if (d.isPrimitive()) {
         char car;
-        if (d == Integer.TYPE) {
+        if (d.equals(Integer.TYPE)) {
           car = 'I';
-        } else if (d == Void.TYPE) {
+        } else if (d.equals(Void.TYPE)) {
           car = 'V';
-        } else if (d == Boolean.TYPE) {
+        } else if (d.equals(Boolean.TYPE)) {
           car = 'Z';
-        } else if (d == Byte.TYPE) {
+        } else if (d.equals(Byte.TYPE)) {
           car = 'B';
-        } else if (d == Character.TYPE) {
+        } else if (d.equals(Character.TYPE)) {
           car = 'C';
-        } else if (d == Short.TYPE) {
+        } else if (d.equals(Short.TYPE)) {
           car = 'S';
-        } else if (d == Double.TYPE) {
+        } else if (d.equals(Double.TYPE)) {
           car = 'D';
-        } else if (d == Float.TYPE) {
+        } else if (d.equals(Float.TYPE)) {
           car = 'F';
         } else /*if (d == Long.TYPE)*/ {
           car = 'J';

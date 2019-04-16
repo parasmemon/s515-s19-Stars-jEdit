@@ -71,7 +71,7 @@ public class BrowserCommandsMenu extends JPopupMenu
 				VFSFile file = files[i];
 
 				VFS _vfs = VFSManager.getVFSForPath(file.getDeletePath());
-				delete &= (vfs == _vfs) && (_vfs.getCapabilities()
+				delete &= (vfs.equals(_vfs)) && (_vfs.getCapabilities()
 					& VFS.DELETE_CAP) != 0;
 
 				if(type == file.getType())

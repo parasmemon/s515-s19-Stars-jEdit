@@ -144,15 +144,15 @@ public class TabbedOptionDialog extends EnhancedDialog implements ActionListener
 	{
 		Object source = evt.getSource();
 
-		if (source == ok)
+		if (source.equals(ok))
 		{
 			ok();
 		}
-		else if (source == cancel)
+		else if (source.equals(cancel))
 		{
 			cancel();
 		}
-		else if (source == apply)
+		else if (source.equals(apply))
 		{
 			ok(false);
 		}

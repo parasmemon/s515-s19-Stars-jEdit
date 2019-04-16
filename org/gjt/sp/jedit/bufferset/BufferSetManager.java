@@ -61,7 +61,7 @@ public class BufferSetManager
 	@EBHandler
 	public void handleEditPaneUpdate(EditPaneUpdate message)
 	{
-		if (message.getWhat() == EditPaneUpdate.DESTROYED)
+		if (message.getWhat().equals(EditPaneUpdate.DESTROYED))
 		{
 			EditPane editPane = message.getEditPane();
 			BufferSet bufferSet = editPane.getBufferSet();
@@ -104,13 +104,13 @@ public class BufferSetManager
 	//{{{ setScope() method
 	public void setScope(BufferSet.Scope scope)
 	{
-		if (scope == this.scope)
+		if (scope.equals(this.scope))
 			return;
         jEdit.setProperty("bufferset.scope", scope.name());
 		if (scope.compareTo(this.scope) > 0)
 		{
 			// The new scope is wider
-			if (scope == BufferSet.Scope.global)
+			if (scope.equals(BufferSet.Scope.global))
 			{
 				final Buffer[] buffers = jEdit.getBuffers();
 				jEdit.visit(new JEditVisitorAdapter()
@@ -412,7 +412,7 @@ public class BufferSetManager
 			EditPane[] editPanes = view.getEditPanes();
 			for (EditPane editPane : editPanes)
 			{
-				if (editPane.getBufferSet() == bufferSet)
+				if (editPane.getBufferSet().equals(bufferSet))
 				{
 					return editPane;
 				}

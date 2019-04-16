@@ -270,7 +270,7 @@ public class This implements java.io.Serializable, Runnable
         // a default equals() testing for equality with the This reference
         if ( methodName.equals("equals" ) ) {
             Object obj = args[0];
-            return new Boolean( this == obj );
+            return new Boolean(this.equals(obj));
         }
 
         // Look for a default invoke() handler method in the namespace

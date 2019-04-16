@@ -61,7 +61,7 @@ public class DisplayManager
 		{
 			dmgr = liter.next();
 			copy = dmgr;
-			if(!dmgr.inUse && dmgr.textArea == textArea)
+			if(!dmgr.inUse && dmgr.textArea.equals(textArea))
 			{
 				dmgr.inUse = true;
 				return dmgr;
@@ -97,7 +97,7 @@ public class DisplayManager
 			while(liter.hasNext())
 			{
 				DisplayManager dmgr = liter.next();
-				if(dmgr.textArea == textArea)
+				if(dmgr.textArea.equals(textArea))
 				{
 					dmgr.dispose();
 					liter.remove();
@@ -414,7 +414,7 @@ public class DisplayManager
 			hideLineRange(firstInvisible,end);
 
 		notifyScreenLineChanges();
-		if(update && textArea.getDisplayManager() == this)
+		if(update && textArea.getDisplayManager().equals(this))
 		{
 			textArea.foldStructureChanged();
 		}
@@ -474,7 +474,7 @@ public class DisplayManager
 	{
 		// Needs information available in textArea only when a
 		// DisplayManager is active in it.
-		assert textArea.getDisplayManager() == this;
+		assert textArea.getDisplayManager().equals(this);
 
 		if(buffer.isLoading())
 			// init() will be called later from bufferLoaded().
@@ -511,7 +511,7 @@ public class DisplayManager
 		// Screen line change must be issued when the textArea
 		// has information of wrap mode for the buffer.
 		// Otherwise, the screen line calculation will be incorrect.
-		assert textArea.getDisplayManager() == this;
+		assert textArea.getDisplayManager().equals(this);
 
 		try
 		{
@@ -651,7 +651,7 @@ public class DisplayManager
 		// buffer are not available.
 		// Maybe, those information should be in DisplayManager
 		// instead of textArea.
-		assert textArea.getDisplayManager() == this;
+		assert textArea.getDisplayManager().equals(this);
 
 		if(!screenLineMgr.isScreenLineCountValid(line))
 		{
@@ -670,7 +670,7 @@ public class DisplayManager
 		initialized = false;
 		folds.reset(buffer.getLineCount());
 		screenLineMgr.reset();
-		if(textArea.getDisplayManager() == this)
+		if(textArea.getDisplayManager().equals(this))
 		{
 			textArea.propertiesChanged();
 			init();
@@ -695,7 +695,7 @@ public class DisplayManager
 
 		initialized = false;
 		folds.reset(buffer.getLineCount());
-		if(textArea.getDisplayManager() == this)
+		if(textArea.getDisplayManager().equals(this))
 		{
 			init();
 		}

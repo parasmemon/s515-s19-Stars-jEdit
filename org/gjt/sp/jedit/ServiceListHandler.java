@@ -61,7 +61,7 @@ class ServiceListHandler extends DefaultHandler
 	public void characters(char[] c, int off, int len)
 	{
 		String tag = peekElement();
-		if (tag == "SERVICE")
+		if (tag.equals("SERVICE"))
 			code.append(c, off, len);
 	} //}}}
 

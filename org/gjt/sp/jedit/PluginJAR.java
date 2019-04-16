@@ -1046,7 +1046,7 @@ public class PluginJAR
 			while(buffer != null)
 			{
 				if(buffer.getFoldHandler().getClass()
-					.getClassLoader() == classLoader)
+					.getClassLoader().equals(classLoader))
 				{
 					buffer.setFoldHandler(
 						new DummyFoldHandler());
@@ -1775,7 +1775,7 @@ public class PluginJAR
 				FoldHandler.getFoldHandler(
 				buffer.getStringProperty("folding"));
 			// == null before loaded
-			if(handler != null && handler != buffer.getFoldHandler())
+			if(handler != null && !handler.equals(buffer.getFoldHandler()))
 			{
 				buffer.setFoldHandler(handler);
 			}

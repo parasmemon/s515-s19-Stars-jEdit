@@ -678,7 +678,7 @@ public class DockableWindowManagerImpl extends DockableWindowManager
 	@EBHandler
 	public void handleDockableWindowUpdate(DockableWindowUpdate msg)
 	{
-		if (msg.getWhat() == DockableWindowUpdate.PROPERTIES_CHANGED)
+		if (msg.getWhat().equals(DockableWindowUpdate.PROPERTIES_CHANGED))
 			propertiesChanged();
 	} //}}}
 
@@ -693,14 +693,14 @@ public class DockableWindowManagerImpl extends DockableWindowManager
 	@EBHandler
 	public void handlePluginUpdate(PluginUpdate pmsg)
 	{
-		if(pmsg.getWhat() == PluginUpdate.LOADED)
+		if(pmsg.getWhat().equals(PluginUpdate.LOADED))
 		{
 			Iterator<DockableWindowFactory.Window> iter = factory.getDockableWindowIterator();
 
 			while(iter.hasNext())
 			{
 				DockableWindowFactory.Window w = iter.next();
-				if(w.plugin == pmsg.getPluginJAR())
+				if(w.plugin.equals(pmsg.getPluginJAR()))
 					addEntry(w);
 			}
 
@@ -710,7 +710,7 @@ public class DockableWindowManagerImpl extends DockableWindowManager
 		{
 			// we don't care
 		}
-		else if(pmsg.getWhat() == PluginUpdate.DEACTIVATED)
+		else if(pmsg.getWhat().equals(PluginUpdate.DEACTIVATED))
 		{
 			Iterator<Entry> iter = getAllPluginEntries(
 				pmsg.getPluginJAR(),false);
@@ -721,7 +721,7 @@ public class DockableWindowManagerImpl extends DockableWindowManager
 					entry.container.remove(entry);
 			}
 		}
-		else if(pmsg.getWhat() == PluginUpdate.UNLOADED)
+		else if(pmsg.getWhat().equals(PluginUpdate.UNLOADED))
 		{
 			Iterator<Entry> iter = getAllPluginEntries(
 				pmsg.getPluginJAR(),true);
@@ -760,7 +760,7 @@ public class DockableWindowManagerImpl extends DockableWindowManager
 		Rectangle newResizeRect = new Rectangle(0,0,
 			PanelWindowContainer.SPLITTER_WIDTH - 2,
 			PanelWindowContainer.SPLITTER_WIDTH - 2);
-		if(resizing == top)
+		if(resizing.equals(top))
 		{
 			resizePos = Math.min(resizePos,getHeight()
 				- top.buttonPanel.getHeight()
@@ -771,7 +771,7 @@ public class DockableWindowManagerImpl extends DockableWindowManager
 			newResizeRect.y = resizePos + top.buttonPanel.getHeight() + 1;
 			newResizeRect.width = top.dockablePanel.getWidth() - 2;
 		}
-		else if(resizing == left)
+		else if(resizing.equals(left))
 		{
 			resizePos = Math.min(resizePos,getWidth()
 				- left.buttonPanel.getWidth()
@@ -782,7 +782,7 @@ public class DockableWindowManagerImpl extends DockableWindowManager
 			newResizeRect.y = left.dockablePanel.getY() + 1;
 			newResizeRect.height = left.dockablePanel.getHeight() - 2;
 		}
-		else if(resizing == bottom)
+		else if(resizing.equals(bottom))
 		{
 			resizePos = Math.min(resizePos,getHeight()
 				- bottom.buttonPanel.getHeight()
@@ -794,7 +794,7 @@ public class DockableWindowManagerImpl extends DockableWindowManager
 				- PanelWindowContainer.SPLITTER_WIDTH + 2;
 			newResizeRect.width = bottom.dockablePanel.getWidth() - 2;
 		}
-		else if(resizing == right)
+		else if(resizing.equals(right))
 		{
 			resizePos = Math.min(resizePos,getWidth()
 				- right.buttonPanel.getWidth()
@@ -936,7 +936,7 @@ public class DockableWindowManagerImpl extends DockableWindowManager
 		while(iter.hasNext())
 		{
 			Entry entry = iter.next();
-			if(entry.factory.plugin == plugin)
+			if(entry.factory.plugin.equals(plugin))
 			{
 				returnValue.add(entry);
 				if(remove)
@@ -948,7 +948,7 @@ public class DockableWindowManagerImpl extends DockableWindowManager
 		while(iter.hasNext())
 		{
 			Entry entry = iter.next();
-			if(entry.factory.plugin == plugin)
+			if(entry.factory.plugin.equals(plugin))
 			{
 				returnValue.add(entry);
 				iter.remove();

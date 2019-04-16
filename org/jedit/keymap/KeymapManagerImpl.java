@@ -129,7 +129,7 @@ public class KeymapManagerImpl implements KeymapManager
 	public void resetKeymap(String name)
 	{
 		State keymapState = getKeymapState(name);
-		if (keymapState == State.SystemModified)
+		if (keymapState.equals(State.SystemModified))
 		{
 			File userFile = getUserKeymapFile(name);
 			userFile.delete();
@@ -141,7 +141,7 @@ public class KeymapManagerImpl implements KeymapManager
 	public void deleteUserKeymap(String name)
 	{
 		State keymapState = getKeymapState(name);
-		if (keymapState == State.User)
+		if (keymapState.equals(State.User))
 		{
 			File userFile = getUserKeymapFile(name);
 			userFile.delete();

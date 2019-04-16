@@ -357,30 +357,30 @@ public class SearchBar extends JToolBar
 		public void actionPerformed(ActionEvent evt)
 		{
 			Object source = evt.getSource();
-			if(source == find)
+			if(source.equals(find))
 				find(false);
-			else if(source == hyperSearch)
+			else if(source.equals(hyperSearch))
 			{
 				jEdit.setBooleanProperty("view.search.hypersearch.toggle",
 					hyperSearch.isSelected());
 				update();
 			}
-			else if(source == ignoreCase)
+			else if(source.equals(ignoreCase))
 			{
 				SearchAndReplace.setIgnoreCase(ignoreCase
 					.isSelected());
 			}
-			else if(source == regexp)
+			else if(source.equals(regexp))
 			{
 				SearchAndReplace.setRegexp(regexp
 					.isSelected());
 			}
-			else if (source == wholeWord)
+			else if (source.equals(wholeWord))
 			{
 				SearchAndReplace.setWholeWord(wholeWord
 					.isSelected());
 			}
-			else if(source == close)
+			else if(source.equals(close))
 			{
 				view.removeToolBar(SearchBar.this);
 				view.getEditPane().focusOnTextArea();

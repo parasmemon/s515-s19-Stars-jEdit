@@ -252,7 +252,7 @@ public class LogViewer extends JPanel implements DefaultFocusComponent
 		public void actionPerformed(ActionEvent e)
 		{
 			Object src = e.getSource();
-			if(src == tail)
+			if(src.equals(tail))
 			{
 				tailIsOn = !tailIsOn;
 				jEdit.setBooleanProperty("log-viewer.tail",tailIsOn);
@@ -261,7 +261,7 @@ public class LogViewer extends JPanel implements DefaultFocusComponent
 					scrollToTail();
 				}
 			}
-			else if(src == copy)
+			else if(src.equals(copy))
 			{
 				StringBuilder buf = new StringBuilder();
 				// TODO: list.getSelectedValues is deprecated. Need to finish the

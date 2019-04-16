@@ -396,8 +396,8 @@ public class HelpViewer extends JFrame implements HelpViewerInterface, HelpHisto
 	@EBHandler
 	public void handlePluginUpdate(PluginUpdate pmsg)
 	{
-		if(pmsg.getWhat() == PluginUpdate.LOADED
-				|| pmsg.getWhat() == PluginUpdate.UNLOADED)
+		if(pmsg.getWhat().equals(PluginUpdate.LOADED)
+				|| pmsg.getWhat().equals(PluginUpdate.UNLOADED))
 			{
 				if(!pmsg.isExiting())
 				{
@@ -500,7 +500,7 @@ public class HelpViewer extends JFrame implements HelpViewerInterface, HelpHisto
 				return;
 			}
 
-			if(source == back)
+			if(source.equals(back))
 			{
 				HistoryEntry entry = historyModel.back(HelpViewer.this);
 				if(entry == null)
@@ -512,7 +512,7 @@ public class HelpViewer extends JFrame implements HelpViewerInterface, HelpHisto
 					gotoURL(entry.url,false,entry.scrollPosition);
 				}
 			}
-			else if(source == forward)
+			else if(source.equals(forward))
 			{
 				HistoryEntry entry = historyModel.forward(HelpViewer.this);
 				if(entry == null)
@@ -534,7 +534,7 @@ public class HelpViewer extends JFrame implements HelpViewerInterface, HelpHisto
 		@Override
 		public void hyperlinkUpdate(HyperlinkEvent evt)
 		{
-			if(evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED)
+			if(evt.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED))
 			{
 				if(evt instanceof HTMLFrameHyperlinkEvent)
 				{
@@ -552,11 +552,11 @@ public class HelpViewer extends JFrame implements HelpViewerInterface, HelpHisto
 					}
 				}
 			}
-			else if (evt.getEventType() == HyperlinkEvent.EventType.ENTERED)
+			else if (evt.getEventType().equals(HyperlinkEvent.EventType.ENTERED))
 			{
 				viewer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
-			else if (evt.getEventType() == HyperlinkEvent.EventType.EXITED)
+			else if (evt.getEventType().equals(HyperlinkEvent.EventType.EXITED))
 			{
 				viewer.setCursor(Cursor.getDefaultCursor());
 			}

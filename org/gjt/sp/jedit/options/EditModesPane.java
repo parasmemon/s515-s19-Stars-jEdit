@@ -224,7 +224,7 @@ public class EditModesPane extends AbstractOptionPane
 		public void actionPerformed( ActionEvent evt )
 		{
 			Object source = evt.getSource();
-			if ( source == browse )
+			if (source.equals(browse))
 			{
 				View view = jEdit.getActiveView();
 				String path = jEdit.getSettingsDirectory();
@@ -241,7 +241,7 @@ public class EditModesPane extends AbstractOptionPane
 				}
 			}
 			else
-			if ( source == ok )
+			if (source.equals(ok))
 			{
 				ok();
 			}

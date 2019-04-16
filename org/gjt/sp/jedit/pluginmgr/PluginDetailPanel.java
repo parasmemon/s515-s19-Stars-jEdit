@@ -73,7 +73,7 @@ class PluginDetailPanel extends JPanel
 	//{{{ setPlugin() method
 	void setPlugin(Entry entry)
 	{
-		if (entry != this.entry)
+		if (!entry.equals(this.entry))
 		{
 			if (entry.status.equals(Entry.LOADED))
 			{

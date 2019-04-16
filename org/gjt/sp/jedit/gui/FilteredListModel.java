@@ -77,7 +77,7 @@ public abstract class FilteredListModel<E extends ListModel<?>> extends Abstract
 	 */
 	public void setList(JList<?> list)
 	{
-		if (list.getModel() != this)
+		if (!list.getModel().equals(this))
 			throw new IllegalArgumentException("The given list " + list + " doesn't use this model " + this);
 		this.list = list;
 	} //}}}

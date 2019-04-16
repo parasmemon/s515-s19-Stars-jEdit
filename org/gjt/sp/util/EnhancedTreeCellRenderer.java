@@ -89,7 +89,7 @@ public abstract class EnhancedTreeCellRenderer extends DefaultTreeCellRenderer
 						return;
 
 					JTree tree = (JTree) evt.getSource();
-					if (tree.getCellRenderer() == EnhancedTreeCellRenderer.this)
+					if (tree.getCellRenderer().equals(EnhancedTreeCellRenderer.this))
 						tree.setCellRenderer(newInstance());
 
 					tree.removePropertyChangeListener("UI", propertyChangeListeners.remove(tree));

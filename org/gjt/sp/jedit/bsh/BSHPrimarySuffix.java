@@ -260,7 +260,7 @@ class BSHPrimarySuffix extends SimpleNode
 		Object obj, CallStack callstack, Interpreter interpreter ) 
 		throws EvalError
 	{
-		if(obj == Primitive.VOID)
+		if(obj.equals(Primitive.VOID))
 			throw new EvalError( 
 			"Attempt to access property on undefined variable or class name", 
 				this, callstack );

@@ -146,7 +146,7 @@ public class CompletionPopup extends JWindow
 	{
 		if (isDisplayable())
 		{
-			if (view.getKeyEventInterceptor() == keyHandler)
+			if (view.getKeyEventInterceptor().equals(keyHandler))
 			{
 				view.setKeyEventInterceptor(null);
 			}
@@ -334,7 +334,7 @@ public class CompletionPopup extends JWindow
 	private void passKeyEventToView(KeyEvent e)
 	{
 		// Remove intercepter to avoid infinite recursion.
-		assert (view.getKeyEventInterceptor() == keyHandler);
+		assert (view.getKeyEventInterceptor().equals(keyHandler));
 		view.setKeyEventInterceptor(null);
 
 		// Here depends on an implementation detail.

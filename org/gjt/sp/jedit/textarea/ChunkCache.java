@@ -769,8 +769,7 @@ class ChunkCache
 			{
 				/* if the user changes the syntax token at the
 				 * end of a line, need to do a full repaint. */
-				if(tokenHandler.getLineContext() !=
-					info.lineContext)
+				if(!tokenHandler.getLineContext().equals(info.lineContext))
 				{
 					lastScreenLine++;
 					needFullRepaint = true;

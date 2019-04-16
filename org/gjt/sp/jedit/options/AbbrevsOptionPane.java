@@ -23,19 +23,25 @@
 package org.gjt.sp.jedit.options;
 
 //{{{ Imports
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.*;
-import javax.swing.table.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
-import java.util.*;
-import java.util.List;
-
-import org.gjt.sp.jedit.gui.*;
 import org.gjt.sp.jedit.*;
+import org.gjt.sp.jedit.gui.EditAbbrevDialog;
+import org.gjt.sp.jedit.gui.RolloverButton;
 import org.gjt.sp.util.GenericGUIUtilities;
 import org.gjt.sp.util.StandardUtilities;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.*;
 //}}}
 
 //{{{ AbbrevsOptionPane class
@@ -274,7 +280,7 @@ public class AbbrevsOptionPane extends AbstractOptionPane
 			AbbrevsModel abbrevsModel = (AbbrevsModel)abbrevsTable.getModel();
 
 			Object source = evt.getSource();
-			if(source == setsComboBox)
+			if(source.equals(setsComboBox))
 			{
 				jEdit.setIntegerProperty("options.abbrevs.combobox.index", setsComboBox.getSelectedIndex());
 				String selected = (String)setsComboBox.getSelectedItem();
@@ -288,7 +294,7 @@ public class AbbrevsOptionPane extends AbstractOptionPane
 				}
 				updateEnabled();
 			}
-			else if(source == add)
+			else if(source.equals(add))
 			{
 				EditAbbrevDialog dialog = new EditAbbrevDialog(
 					GenericGUIUtilities.getParentDialog(AbbrevsOptionPane.this),
@@ -302,11 +308,11 @@ public class AbbrevsOptionPane extends AbstractOptionPane
 					add(abbrevsModel,abbrev,expansion);
 				}
 			}
-			else if(source == edit)
+			else if(source.equals(edit))
 			{
 				edit();
 			}
-			else if(source == remove)
+			else if(source.equals(remove))
 			{
 				int selectedRow = abbrevsTable.getSelectedRow();
 				abbrevsModel.remove(selectedRow);

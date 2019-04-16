@@ -190,36 +190,36 @@ class Types
 
 		if ( lhsType.isPrimitive() && rhsType.isPrimitive() )
 		{
-			if ( lhsType == rhsType )
+			if (lhsType.equals(rhsType))
 				return true;
 
 			// handle primitive widening conversions - JLS 5.1.2
-			if ( (rhsType == Byte.TYPE) &&
-				(lhsType == Short.TYPE || lhsType == Integer.TYPE
-				|| lhsType == Long.TYPE || lhsType == Float.TYPE
-				|| lhsType == Double.TYPE))
+			if ( (rhsType.equals(Byte.TYPE)) &&
+				(lhsType.equals(Short.TYPE) || lhsType.equals(Integer.TYPE)
+				|| lhsType.equals(Long.TYPE) || lhsType.equals(Float.TYPE)
+				|| lhsType.equals(Double.TYPE)))
                     return true;
 
-            if ( (rhsType == Short.TYPE) &&
-				(lhsType == Integer.TYPE || lhsType == Long.TYPE ||
-                lhsType == Float.TYPE || lhsType == Double.TYPE))
+            if ( (rhsType.equals(Short.TYPE)) &&
+				(lhsType.equals(Integer.TYPE) || lhsType.equals(Long.TYPE) ||
+                        lhsType.equals(Float.TYPE) || lhsType.equals(Double.TYPE)))
                     return true;
 
-            if ((rhsType == Character.TYPE) &&
-				(lhsType == Integer.TYPE || lhsType == Long.TYPE ||
-                lhsType == Float.TYPE || lhsType == Double.TYPE))
+            if ((rhsType.equals(Character.TYPE)) &&
+				(lhsType.equals(Integer.TYPE) || lhsType.equals(Long.TYPE) ||
+                        lhsType.equals(Float.TYPE) || lhsType.equals(Double.TYPE)))
                     return true;
 
-            if ((rhsType == Integer.TYPE) &&
-				(lhsType == Long.TYPE || lhsType == Float.TYPE ||
-                lhsType == Double.TYPE))
+            if ((rhsType.equals(Integer.TYPE)) &&
+				(lhsType.equals(Long.TYPE) || lhsType.equals(Float.TYPE) ||
+                        lhsType.equals(Double.TYPE)))
                     return true;
 
-            if ((rhsType == Long.TYPE) &&
-				(lhsType == Float.TYPE || lhsType == Double.TYPE))
+            if ((rhsType.equals(Long.TYPE)) &&
+				(lhsType.equals(Float.TYPE) || lhsType.equals(Double.TYPE)))
                 return true;
 
-            if ((rhsType == Float.TYPE) && (lhsType == Double.TYPE))
+            if ((rhsType.equals(Float.TYPE)) && (lhsType.equals(Double.TYPE)))
                 return true;
         }
         else
@@ -240,13 +240,13 @@ class Types
 			return false;
 
 		// prim can be boxed and assigned to Object
-		if ( lhsType == Object.class )
+		if (lhsType.equals(Object.class))
 			return true;
 
 		// prim numeric type can be boxed and assigned to number
-		if ( lhsType == Number.class
-			&& rhsType != Character.TYPE
-			&& rhsType != Boolean.TYPE
+		if ( lhsType.equals(Number.class)
+			&& !rhsType.equals(Character.TYPE)
+			&& !rhsType.equals(Boolean.TYPE)
 		)
 			return true;
 
@@ -254,7 +254,7 @@ class Types
 		// I don't know if this is faster than a flat list of 'if's like above.
 		// wrapperMap maps both prim to wrapper and wrapper to prim types,
 		// so this test is symmetric
-		if ( Primitive.wrapperMap.get( lhsType ) == rhsType )
+		if (Primitive.wrapperMap.get( lhsType ).equals(rhsType))
 			return true;
 
 		return false;
@@ -270,7 +270,7 @@ class Types
 			return castObject(
 				toType, fromType, null/*fromValue*/,
 				ASSIGNMENT, true/*checkOnly*/
-			) == VALID_CAST;
+			).equals(VALID_CAST);
 		} catch ( UtilEvalError e ) {
 			// This should not happen with checkOnly true
 			throw new InterpreterError("err in cast check: "+e);
@@ -387,24 +387,24 @@ class Types
 			throw new InterpreterError("bad cast params 1");
 		if ( !checkOnly && fromValue == null )
 			throw new InterpreterError("bad cast params 2");
-		if ( fromType == Primitive.class )
+		if (fromType.equals(Primitive.class))
 			throw new InterpreterError("bad from Type, need to unwrap");
-		if ( fromValue == Primitive.NULL && fromType != null )
+		if ( fromValue.equals(Primitive.NULL) && fromType != null )
 			throw new InterpreterError("inconsistent args 1");
-		if ( fromValue == Primitive.VOID && fromType != Void.TYPE )
+		if ( fromValue.equals(Primitive.VOID) && !fromType.equals(Void.TYPE))
 			throw new InterpreterError("inconsistent args 2");
-		if ( toType == Void.TYPE )
+		if (toType.equals(Void.TYPE))
 			throw new InterpreterError("loose toType should be null");
 		
 		// assignment to loose type, void type, or exactly same type
-		if ( toType == null || toType == fromType )
+		if ( toType == null || toType.equals(fromType))
 			return checkOnly ? VALID_CAST :
 				fromValue;
 
 		// Casting to primitive type
         if ( toType.isPrimitive() )
 		{
-			if ( fromType == Void.TYPE || fromType == null 
+			if ( fromType.equals(Void.TYPE) || fromType == null
 				|| fromType.isPrimitive() )
 			{
 				// Both primitives, do primitive cast
@@ -444,12 +444,12 @@ class Types
 		// Else, casting to reference type
 
 		// Casting from primitive or void (to reference type)
-		if ( fromType == Void.TYPE || fromType == null
+		if ( fromType.equals(Void.TYPE) || fromType == null
 			|| fromType.isPrimitive() )
 		{
 			// cast from primitive to wrapper type
 			if ( Primitive.isWrapperType( toType )
-				&& fromType != Void.TYPE && fromType != null )
+				&& !fromType.equals(Void.TYPE) && fromType != null )
 			{
 				// primitive to wrapper type
 				return checkOnly ? VALID_CAST :
@@ -459,8 +459,8 @@ class Types
 			}
 
 			// Primitive (not null or void) to Object.class type
-			if ( toType == Object.class 
-				&& fromType != Void.TYPE && fromType != null )
+			if ( toType.equals(Object.class)
+				&& !fromType.equals(Void.TYPE) && fromType != null )
 			{
 				// box it
 				return checkOnly ? VALID_CAST :

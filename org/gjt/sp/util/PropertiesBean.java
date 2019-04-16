@@ -211,14 +211,14 @@ public abstract class PropertiesBean
 		else
 		{
 			// just make sure it's a supported type.
-			if (_class != Boolean.class && _class != Boolean.TYPE
-			    && _class != Character.class && _class != Character.TYPE
-			    && _class != Double.class && _class != Double.TYPE
-			    && _class != Float.class && _class != Float.TYPE
-			    && _class != Integer.class && _class != Integer.TYPE
-			    && _class != Long.class && _class != Long.TYPE
-			    && _class != Short.class && _class != Short.TYPE
-			    && _class != String.class)
+			if (!_class.equals(Boolean.class) && !_class.equals(Boolean.TYPE)
+			    && !_class.equals(Character.class) && !_class.equals(Character.TYPE)
+			    && !_class.equals(Double.class) && !_class.equals(Double.TYPE)
+			    && !_class.equals(Float.class) && !_class.equals(Float.TYPE)
+			    && !_class.equals(Integer.class) && !_class.equals(Integer.TYPE)
+			    && !_class.equals(Long.class) && !_class.equals(Long.TYPE)
+			    && !_class.equals(Short.class) && !_class.equals(Short.TYPE)
+			    && !_class.equals(String.class))
 			{
 				Log.log(Log.WARNING, this, "unsupported type: " + _class.getName());
 				return null;
@@ -246,21 +246,21 @@ public abstract class PropertiesBean
 		}
 		else
 		{
-			if (_class == Boolean.class || _class == Boolean.TYPE)
+			if (_class.equals(Boolean.class) || _class.equals(Boolean.TYPE))
 				_ret = Boolean.valueOf(value);
-			else if (_class == Character.class || _class == Character.TYPE)
+			else if (_class.equals(Character.class) || _class.equals(Character.TYPE))
 				_ret = Character.valueOf(value.charAt(0));
-			else if (_class == Double.class || _class == Double.TYPE)
+			else if (_class.equals(Double.class) || _class.equals(Double.TYPE))
 				_ret = Double.valueOf(value);
-			else if (_class == Float.class || _class == Float.TYPE)
+			else if (_class.equals(Float.class) || _class.equals(Float.TYPE))
 				_ret = Float.valueOf(value);
-			else if (_class == Integer.class || _class == Integer.TYPE)
+			else if (_class.equals(Integer.class) || _class.equals(Integer.TYPE))
 				_ret = Integer.valueOf(value);
-			else if (_class == Long.class || _class == Long.TYPE)
+			else if (_class.equals(Long.class) || _class.equals(Long.TYPE))
 				_ret = Long.valueOf(value);
-			else if (_class == Short.class || _class == Short.TYPE)
+			else if (_class.equals(Short.class) || _class.equals(Short.TYPE))
 				_ret = Short.valueOf(value);
-			else if (_class == String.class)
+			else if (_class.equals(String.class))
 				_ret = value;
 			else
 				Log.log(Log.WARNING, this, "unsupported type: " + _class.getName());

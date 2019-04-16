@@ -239,7 +239,7 @@ class Name implements java.io.Serializable
 			Object obj = resolveThisFieldReference( 
 				callstack, namespace, interpreter, evalName, false );
 
-			if ( obj != Primitive.VOID )
+			if (!obj.equals(Primitive.VOID))
 				return completeRound( evalName, FINISHED, obj );
 		}
 
@@ -266,7 +266,7 @@ class Name implements java.io.Serializable
 					interpreter, varName, true );
 			}
 
-			if ( obj != Primitive.VOID ) 
+			if (!obj.equals(Primitive.VOID))
 			{
 				// Resolved the variable
 				if ( Interpreter.DEBUG ) 
@@ -352,11 +352,11 @@ class Name implements java.io.Serializable
 			Do some basic validity checks.
 		*/
 
-		if ( evalBaseObject == Primitive.NULL) // previous round produced null
+		if (evalBaseObject.equals(Primitive.NULL)) // previous round produced null
 			throw new UtilTargetError( new NullPointerException( 
 				"Null Pointer while evaluating: " +value ) );
 
-		if ( evalBaseObject == Primitive.VOID) // previous round produced void
+		if (evalBaseObject.equals(Primitive.VOID)) // previous round produced void
 			throw new UtilEvalError(
 				"Undefined variable or class name while evaluating: "+value);
 
@@ -383,7 +383,7 @@ class Name implements java.io.Serializable
 				{
 					// getClassInstance() throws exception if not there
 					if ( ns.classInstance != null 
-						&& ns.classInstance.getClass() == clas 
+						&& ns.classInstance.getClass().equals(clas)
 					)
 						return completeRound( 
 							field, suffix(evalName), ns.classInstance );
@@ -828,7 +828,7 @@ class Name implements java.io.Serializable
         Name targetName = namespace.getNameResolver( prefix );
         Object obj = targetName.toObject( callstack, interpreter );
 
-		if ( obj == Primitive.VOID ) 
+		if (obj.equals(Primitive.VOID))
 			throw new UtilEvalError( "Attempt to resolve method: "+methodName
 					+"() on undefined variable or class name: "+targetName);
 
@@ -837,7 +837,7 @@ class Name implements java.io.Serializable
 
             if (obj instanceof Primitive) {
 
-                if (obj == Primitive.NULL)
+                if (obj.equals(Primitive.NULL))
                     throw new UtilTargetError( new NullPointerException( 
 						"Null Pointer in Method Invocation" ) );
 

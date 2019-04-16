@@ -315,7 +315,7 @@ public class Chunk extends Token
 	{
 		return (fontSubstEnabled && glyphs != null &&
 				(glyphs.length > 1 ||
-				(glyphs.length == 1 && glyphs[0].getFont() != style.getFont())));
+				(glyphs.length == 1 && !glyphs[0].getFont().equals(style.getFont()))));
 	}
 	//}}}
 
@@ -766,7 +766,7 @@ public class Chunk extends Token
 			{
 				return;
 			}
-			if (font == rangeFont)
+			if (font.equals(rangeFont))
 			{
 				rangeLength += length;
 			}

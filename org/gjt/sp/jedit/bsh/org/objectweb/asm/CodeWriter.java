@@ -736,7 +736,7 @@ public class CodeWriter implements CodeVisitor {
     if (CHECK) {
       if (label.owner == null) {
         label.owner = this;
-      } else if (label.owner != this) {
+      } else if (!label.owner.equals(this)) {
         throw new IllegalArgumentException();
       }
     }
@@ -791,7 +791,7 @@ public class CodeWriter implements CodeVisitor {
     if (CHECK) {
       if (label.owner == null) {
         label.owner = this;
-      } else if (label.owner != this) {
+      } else if (!label.owner.equals(this)) {
         throw new IllegalArgumentException();
       }
     }
@@ -936,7 +936,7 @@ public class CodeWriter implements CodeVisitor {
     final String type)
   {
     if (CHECK) {
-      if (start.owner != this || end.owner != this || handler.owner != this) {
+      if (!start.owner.equals(this) || !end.owner.equals(this) || !handler.owner.equals(this)) {
         throw new IllegalArgumentException();
       }
       if (!start.resolved || !end.resolved || !handler.resolved) {
@@ -1024,10 +1024,10 @@ public class CodeWriter implements CodeVisitor {
     final int index)
   {
     if (CHECK) {
-      if (start.owner != this || !start.resolved) {
+      if (!start.owner.equals(this) || !start.resolved) {
         throw new IllegalArgumentException();
       }
-      if (end.owner != this || !end.resolved) {
+      if (!end.owner.equals(this) || !end.resolved) {
         throw new IllegalArgumentException();
       }
     }
@@ -1045,7 +1045,7 @@ public class CodeWriter implements CodeVisitor {
 
   public void visitLineNumber (final int line, final Label start) {
     if (CHECK) {
-      if (start.owner != this || !start.resolved) {
+      if (!start.owner.equals(this) || !start.resolved) {
         throw new IllegalArgumentException();
       }
     }

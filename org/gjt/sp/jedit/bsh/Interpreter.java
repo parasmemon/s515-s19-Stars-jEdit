@@ -471,7 +471,7 @@ public class Interpreter
                     if(ret instanceof ReturnControl)
                         ret = ((ReturnControl)ret).value;
 
-                    if( ret != Primitive.VOID )
+                    if(!ret.equals(Primitive.VOID))
                     {
                         setu("$_", ret);
 						if ( showResults )
@@ -654,7 +654,7 @@ public class Interpreter
 					}
 
 					if ( localInterpreter.showResults
-						&& retVal != Primitive.VOID )
+						&& !retVal.equals(Primitive.VOID))
 						println("<" + retVal + ">");
                 }
             } catch(ParseException e) {

@@ -227,12 +227,12 @@ public class CompleteWord extends CompletionPopup
 		{
 			// only complete current buffer's keyword map
 			KeywordMap _keywordMap;
-			if(b == buffer)
+			if(b.equals(buffer))
 				_keywordMap = keywordMap;
 			else
 				_keywordMap = null;
 
-			int offset = (b == buffer ? caret : 0);
+			int offset = (b.equals(buffer) ? caret : 0);
 
 			getCompletions(b,word,keywordMap,noWordSep,
 					offset,completions);

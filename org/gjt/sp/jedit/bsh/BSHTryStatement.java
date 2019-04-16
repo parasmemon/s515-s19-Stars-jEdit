@@ -146,7 +146,7 @@ class BSHTryStatement extends SimpleNode
 					new BlockNameSpace( enclosingNameSpace );
 
 				try {
-					if ( fp.type == BSHFormalParameter.UNTYPED )
+					if (fp.type.equals(BSHFormalParameter.UNTYPED))
 						// set an untyped variable directly in the block
 						cbNameSpace.setBlockVariable( fp.name, thrown );
 					else

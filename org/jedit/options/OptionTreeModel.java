@@ -121,7 +121,7 @@ public class OptionTreeModel implements TreeModel
 		TreeModelEvent modelEvent = null;
 		for (int i = listeners.length - 2; i >= 0; i -= 2)
 		{
-			if (listeners[i] != TreeModelListener.class)
+			if (!listeners[i].equals(TreeModelListener.class))
 				continue;
 
 			if (modelEvent == null)
@@ -143,7 +143,7 @@ public class OptionTreeModel implements TreeModel
 		TreeModelEvent modelEvent = null;
 		for (int i = listeners.length - 2; i >= 0; i -= 2)
 		{
-			if (listeners[i] != TreeModelListener.class)
+			if (!listeners[i].equals(TreeModelListener.class))
 				continue;
 
 			if (modelEvent == null)
@@ -165,7 +165,7 @@ public class OptionTreeModel implements TreeModel
 		TreeModelEvent modelEvent = null;
 		for (int i = listeners.length - 2; i >= 0; i -= 2)
 		{
-			if (listeners[i] != TreeModelListener.class)
+			if (!listeners[i].equals(TreeModelListener.class))
 				continue;
 
 			if (modelEvent == null)
@@ -187,7 +187,7 @@ public class OptionTreeModel implements TreeModel
 		TreeModelEvent modelEvent = null;
 		for (int i = listeners.length - 2; i >= 0; i -= 2)
 		{
-			if (listeners[i] != TreeModelListener.class)
+			if (!listeners[i].equals(TreeModelListener.class))
 				continue;
 
 			if (modelEvent == null)

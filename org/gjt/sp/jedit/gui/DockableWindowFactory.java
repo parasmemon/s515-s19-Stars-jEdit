@@ -132,7 +132,7 @@ public class DockableWindowFactory
 		{
 			Map.Entry entry = (Map.Entry)entries.next();
 			Window factory = (Window)entry.getValue();
-			if(factory.plugin == plugin)
+			if(factory.plugin.equals(plugin))
 				entries.remove();
 		}
 	} //}}}

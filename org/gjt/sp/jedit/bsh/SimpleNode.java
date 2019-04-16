@@ -212,7 +212,7 @@ class SimpleNode implements Node
 			text.append(t.image);
 			if ( !t.image.equals(".") )
 				text.append(" ");
-			if ( t==lastToken ||
+			if ( t.equals(lastToken) ||
 				t.image.equals("{") || t.image.equals(";") )
 				break;
 			t=t.next;

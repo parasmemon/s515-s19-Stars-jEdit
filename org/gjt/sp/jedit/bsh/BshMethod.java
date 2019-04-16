@@ -338,7 +338,7 @@ public class BshMethod
 			else  // untyped param
 			{
 				// getAssignable would catch this for typed param
-				if ( argValues[i] == Primitive.VOID)
+				if (argValues[i].equals(Primitive.VOID))
 					throw new EvalError(
 						"Undefined variable or class name, parameter: " +
 						paramNames[i] + " to method: " 
@@ -384,7 +384,7 @@ public class BshMethod
 
 			// Check for explicit return of value from void method type.
 			// retControl.returnPoint is the Node of the return statement
-			if ( returnType == Void.TYPE && ret != Primitive.VOID )
+			if ( returnType.equals(Void.TYPE) && !ret.equals(Primitive.VOID))
 				throw new EvalError( "Cannot return value from void method", 
 				retControl.returnPoint, returnStack);
 		}
@@ -392,7 +392,7 @@ public class BshMethod
 		if ( returnType != null )
 		{
 			// If return type void, return void as the value.
-			if ( returnType == Void.TYPE )
+			if (returnType.equals(Void.TYPE))
 				return Primitive.VOID;
 
 			// return type is a class

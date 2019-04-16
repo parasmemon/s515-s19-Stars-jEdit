@@ -76,7 +76,7 @@ class BSHAssignment extends SimpleNode implements ParserConstants
 		// else
         rhs = rhsNode.eval(callstack, interpreter);
 
-        if ( rhs == Primitive.VOID )
+        if (rhs.equals(Primitive.VOID))
             throw new EvalError("Void assignment.", this, callstack );
 
 		try {
@@ -153,7 +153,7 @@ class BSHAssignment extends SimpleNode implements ParserConstants
 			In BeanShell, we'll disallow VOID (undefined) values.
 			(or should we map them to the empty string?)
 		*/
-		if ( lhs instanceof String && rhs != Primitive.VOID ) {
+		if ( lhs instanceof String && !rhs.equals(Primitive.VOID)) {
 			if ( kind != PLUS )
 				throw new UtilEvalError(
 					"Use of non + operator with String LHS" );
@@ -162,10 +162,10 @@ class BSHAssignment extends SimpleNode implements ParserConstants
 		}
 
         if ( lhs instanceof Primitive || rhs instanceof Primitive )
-            if(lhs == Primitive.VOID || rhs == Primitive.VOID)
+            if(lhs.equals(Primitive.VOID) || rhs.equals(Primitive.VOID))
                 throw new UtilEvalError(
 					"Illegal use of undefined object or 'void' literal" );
-            else if ( lhs == Primitive.NULL || rhs == Primitive.NULL )
+            else if ( lhs.equals(Primitive.NULL) || rhs.equals(Primitive.NULL))
                 throw new UtilEvalError(
 					"Illegal use of null object or 'null' literal" );
 

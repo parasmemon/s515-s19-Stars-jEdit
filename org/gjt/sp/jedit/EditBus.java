@@ -380,7 +380,7 @@ public class EditBus
 				     it.hasNext(); )
 				{
 					EBMessageHandler emh = it.next();
-					if (emh.comp == comp)
+					if (emh.comp.equals(comp))
 						it.remove();
 				}
 			}

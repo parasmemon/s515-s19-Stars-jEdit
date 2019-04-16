@@ -254,7 +254,7 @@ public class CopyFileWorker extends Task
 	@Nullable
 	private String getTargetName(Object session, VFS vfs, String path, String baseName) throws IOException
 	{
-		if (behavior == Behavior.OVERWRITE)
+		if (behavior.equals(Behavior.OVERWRITE))
 		{
 			// We want to overwrite, no need to check anything
 			return baseName;
@@ -267,7 +267,7 @@ public class CopyFileWorker extends Task
 			// The target file do not exist, perfect
 			return baseName;
 		}
-		if (behavior == Behavior.SKIP)
+		if (behavior.equals(Behavior.SKIP))
 			return null;
 
 

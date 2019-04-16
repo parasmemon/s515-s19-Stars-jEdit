@@ -352,7 +352,7 @@ public class BeanShell
 			try
 			{
 				// no need to do this for macros!
-				if(namespace == bsh.getNameSpace())
+				if(namespace.equals(bsh.getNameSpace()))
 				{
 					bsh.resetDefaultVariables(namespace);
 					interp.unset("scriptPath");

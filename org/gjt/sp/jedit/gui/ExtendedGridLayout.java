@@ -255,7 +255,7 @@ public class ExtendedGridLayout implements LayoutManager2
 			{
 				throw new IllegalArgumentException("constraints must not be a placeholder");
 			}
-			else if (component != eglConstraints.getComponent())
+			else if (!component.equals(eglConstraints.getComponent()))
 			{
 				throw new IllegalArgumentException("constraints is not the right one for this component");
 			}

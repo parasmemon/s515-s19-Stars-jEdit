@@ -57,7 +57,7 @@ class BSHBinaryExpression extends SimpleNode
         if (kind == INSTANCEOF)
         {
 			// null object ref is not instance of any type
-			if ( lhs == Primitive.NULL )
+			if (lhs.equals(Primitive.NULL))
 				return new Primitive(false);
 
             Class rhs = ((BSHType)jjtGetChild(1)).getType( 
@@ -74,7 +74,7 @@ class BSHBinaryExpression extends SimpleNode
 				i.e. (5 instanceof bsh.Primitive) will be true
 			*/
 			if ( lhs instanceof Primitive )
-				if ( rhs == org.gjt.sp.jedit.bsh.Primitive.class )
+				if (rhs.equals(Primitive.class))
 					return new Primitive(true);
 				else
 					return new Primitive(false);
@@ -182,10 +182,10 @@ class BSHBinaryExpression extends SimpleNode
         switch(kind)
         {
             case EQ:
-                return new Primitive((lhs == rhs));
+                return new Primitive((lhs.equals(rhs)));
 
             case NE:
-                return new Primitive((lhs != rhs));
+                return new Primitive((!lhs.equals(rhs)));
 
             case PLUS:
                 if(lhs instanceof String || rhs instanceof String)
@@ -195,12 +195,12 @@ class BSHBinaryExpression extends SimpleNode
 
             default:
                 if(lhs instanceof Primitive || rhs instanceof Primitive)
-                    if ( lhs == Primitive.VOID || rhs == Primitive.VOID )
+                    if ( lhs.equals(Primitive.VOID) || rhs.equals(Primitive.VOID))
                         throw new EvalError(
 				"illegal use of undefined variable, class, or 'void' literal", 
 							this, callstack );
                     else 
-					if ( lhs == Primitive.NULL || rhs == Primitive.NULL )
+					if ( lhs.equals(Primitive.NULL) || rhs.equals(Primitive.NULL))
                         throw new EvalError(
 				"illegal use of null value or 'null' literal", this, callstack);
 
@@ -214,7 +214,7 @@ class BSHBinaryExpression extends SimpleNode
 	*/
 	private boolean isPrimitiveValue( Object obj ) {
         return ( (obj instanceof Primitive) 
-			&& (obj != Primitive.VOID) && (obj != Primitive.NULL) );
+			&& (!obj.equals(Primitive.VOID)) && (!obj.equals(Primitive.NULL)) );
 	}
 
 	/*

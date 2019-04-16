@@ -46,7 +46,7 @@ class BSHEnhancedForStatement extends SimpleNode implements ParserConstants
 
 		final Object iteratee = expression.eval( callstack, interpreter );
 
-		if ( iteratee == Primitive.NULL )
+		if (iteratee.equals(Primitive.NULL))
 			throw new EvalError("The collection, array, map, iterator, or " +
 				"enumeration portion of a for statement cannot be null.", 
 				this, callstack );

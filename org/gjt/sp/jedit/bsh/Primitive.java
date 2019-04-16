@@ -122,8 +122,8 @@ public final class Primitive implements ParserConstants, java.io.Serializable
             throw new InterpreterError(
 				"Use Primitve.NULL instead of Primitive(null)");
 
-		if ( value != Special.NULL_VALUE 
-			&& value != Special.VOID_TYPE &&
+		if ( !value.equals(Special.NULL_VALUE)
+			&& !value.equals(Special.VOID_TYPE) &&
 			!isWrapperType( value.getClass() ) 
 		)
             throw new InterpreterError( "Not a wrapper type: "+value);
@@ -145,10 +145,10 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 	*/
     public Object getValue()
     {
-        if ( value == Special.NULL_VALUE )
+        if (value.equals(Special.NULL_VALUE))
             return null;
         else 
-		if ( value == Special.VOID_TYPE )
+		if (value.equals(Special.VOID_TYPE))
                 throw new InterpreterError("attempt to unwrap void type");
         else
             return value;
@@ -156,9 +156,9 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 
     public String toString()
     {
-        if(value == Special.NULL_VALUE)
+        if(value.equals(Special.NULL_VALUE))
             return "null";
-        else if(value == Special.VOID_TYPE)
+        else if(value.equals(Special.VOID_TYPE))
             return "void";
         else
             return value.toString();
@@ -171,12 +171,12 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 	*/
     public Class getType()
     {
-		if ( this == Primitive.VOID )
+		if (this.equals(Primitive.VOID))
 			return Void.TYPE;
 
 		// NULL return null as type... we currently use null type to indicate 
 		// loose typing throughout bsh.
-		if ( this == Primitive.NULL )
+		if (this.equals(Primitive.NULL))
 			return null;
 
 		return unboxType( value.getClass() );
@@ -194,10 +194,10 @@ public final class Primitive implements ParserConstants, java.io.Serializable
         throws UtilEvalError
     {
 		// special primitive types
-        if ( obj1 == NULL || obj2 == NULL )
+        if ( obj1.equals(NULL) || obj2.equals(NULL))
             throw new UtilEvalError(
 				"Null value or 'null' literal in binary operation");
-        if ( obj1 == VOID || obj2 == VOID )
+        if ( obj1.equals(VOID) || obj2.equals(VOID))
             throw new UtilEvalError(
 			"Undefined variable, class, or 'void' literal in binary operation");
 
@@ -215,7 +215,7 @@ public final class Primitive implements ParserConstants, java.io.Serializable
         Object lhs = operands[0];
         Object rhs = operands[1];
 
-        if(lhs.getClass() != rhs.getClass())
+        if(!lhs.getClass().equals(rhs.getClass()))
             throw new UtilEvalError("Type mismatch in operator.  " 
 			+ lhs.getClass() + " cannot be used with " + rhs.getClass() );
 
@@ -229,7 +229,7 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 		// If both original args were Primitives return a Primitive result
 		// else it was mixed (wrapper/primitive) return the wrapper type
 		// Exception is for boolean result, return the primitive
-		if ( (lhsOrgType == Primitive.class && rhsOrgType == Primitive.class)
+		if ( (lhsOrgType.equals(Primitive.class) && rhsOrgType.equals(Primitive.class))
 			|| result instanceof Boolean
 		)
 			return new Primitive( result );
@@ -617,10 +617,10 @@ public final class Primitive implements ParserConstants, java.io.Serializable
     public static Primitive unaryOperation(Primitive val, int kind)
         throws UtilEvalError
     {
-        if (val == NULL)
+        if (val.equals(NULL))
             throw new UtilEvalError(
 				"illegal use of null object or 'null' literal");
-        if (val == VOID)
+        if (val.equals(VOID))
             throw new UtilEvalError(
 				"illegal use of undefined object or 'void' literal");
 
@@ -636,11 +636,11 @@ public final class Primitive implements ParserConstants, java.io.Serializable
             // ++ and -- must be cast back the original type
             if(kind == INCR || kind == DECR)
             {
-                if(operandType == Byte.TYPE)
+                if(operandType.equals(Byte.TYPE))
                     return new Primitive((byte)result);
-                if(operandType == Short.TYPE)
+                if(operandType.equals(Short.TYPE))
                     return new Primitive((short)result);
-                if(operandType == Character.TYPE)
+                if(operandType.equals(Character.TYPE))
                     return new Primitive((char)result);
             }
 
@@ -764,7 +764,7 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 	*/
 	public boolean isNumber() {
 		return ( !(value instanceof Boolean) 
-			&& !(this == NULL) && !(this == VOID) );
+			&& !(this.equals(NULL)) && !(this.equals(VOID)) );
 	}
 
     public Number numberValue() throws UtilEvalError
@@ -813,7 +813,7 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 	public static Object unwrap( Object obj ) 
 	{
         // map voids to nulls for the outside world
-        if (obj == Primitive.VOID)
+        if (obj.equals(Primitive.VOID))
             return null;
 
         // unwrap primitives
@@ -860,7 +860,7 @@ public final class Primitive implements ParserConstants, java.io.Serializable
     public static Object wrap(
 		Object value, Class type )
     {
-        if ( type == Void.TYPE )
+        if (type.equals(Void.TYPE))
             return Primitive.VOID;
 
         if ( value == null )
@@ -880,7 +880,7 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 	{
 		if ( type == null || !type.isPrimitive() )
 			return Primitive.NULL;
-		if ( type == Boolean.TYPE )
+		if (type.equals(Boolean.TYPE))
 			return new Primitive( false );
 
 		// non boolean primitive, get appropriate flavor of zero
@@ -968,13 +968,13 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 			throw new InterpreterError("bad cast param 2");
 		if ( fromType != null && !fromType.isPrimitive() )
 			throw new InterpreterError("bad fromType:" +fromType);
-		if ( fromValue == Primitive.NULL && fromType != null )
+		if ( fromValue.equals(Primitive.NULL) && fromType != null )
 			throw new InterpreterError("inconsistent args 1");
-		if ( fromValue == Primitive.VOID && fromType != Void.TYPE )
+		if ( fromValue.equals(Primitive.VOID) && !fromType.equals(Void.TYPE))
 			throw new InterpreterError("inconsistent args 2");
 
 		// can't cast void to anything
-		if ( fromType == Void.TYPE )
+		if (fromType.equals(Void.TYPE))
 			if ( checkOnly )
 				return Types.INVALID_CAST;
 			else
@@ -1013,9 +1013,9 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 		}
 
 		// can only cast boolean to boolean
-		if ( fromType == Boolean.TYPE )
+		if (fromType.equals(Boolean.TYPE))
 		{
-			if ( toType != Boolean.TYPE )
+			if (!toType.equals(Boolean.TYPE))
 				if ( checkOnly )
 					return Types.INVALID_CAST;
 				else
@@ -1063,7 +1063,7 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 			throw new InterpreterError("null value in castWrapper, guard");
 		if ( value instanceof Boolean )
 		{
-			if ( toType != Boolean.TYPE )
+			if (!toType.equals(Boolean.TYPE))
 				throw new InterpreterError("bad wrapper cast of boolean");
 			else
 				return value;
@@ -1078,19 +1078,19 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 
 		Number number = (Number)value;
 
-		if (toType == Byte.TYPE)
+		if (toType.equals(Byte.TYPE))
 			return new Byte(number.byteValue());
-		if (toType == Short.TYPE)
+		if (toType.equals(Short.TYPE))
 			return new Short(number.shortValue());
-		if (toType == Character.TYPE)
+		if (toType.equals(Character.TYPE))
 			return new Character((char)number.intValue());
-		if (toType == Integer.TYPE)
+		if (toType.equals(Integer.TYPE))
 			return new Integer(number.intValue());
-		if (toType == Long.TYPE)
+		if (toType.equals(Long.TYPE))
 			return new Long(number.longValue());
-		if (toType == Float.TYPE)
+		if (toType.equals(Float.TYPE))
 			return new Float(number.floatValue());
-		if (toType == Double.TYPE)
+		if (toType.equals(Double.TYPE))
 			return new Double(number.doubleValue());
 
 		throw new InterpreterError("error in wrapper cast");

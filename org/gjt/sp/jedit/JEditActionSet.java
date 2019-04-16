@@ -238,11 +238,11 @@ public abstract class JEditActionSet<E extends JEditAbstractEditAction> implemen
 	public E getAction(String name)
 	{
 		JEditAbstractEditAction obj = actions.get(name);
-		if(obj == placeholder)
+		if(obj.equals(placeholder))
 		{
 			load();
 			obj = actions.get(name);
-			if(obj == placeholder)
+			if(obj.equals(placeholder))
 			{
 				Log.log(Log.WARNING,this,"Outdated cache");
 				obj = null;
@@ -290,7 +290,7 @@ public abstract class JEditActionSet<E extends JEditAbstractEditAction> implemen
 		LinkedList<String> retVal = new LinkedList<String>();
 		for (Object obj : actions.values())
 		{
-			if (obj == placeholder)
+			if (obj.equals(placeholder))
 			{
 				// ??? this should only be called with
 				// fully loaded action set
