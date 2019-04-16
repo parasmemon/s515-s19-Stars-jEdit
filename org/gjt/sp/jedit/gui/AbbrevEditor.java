@@ -220,19 +220,19 @@ public class AbbrevEditor extends JPanel
 	//{{{ getAbbrevField() method
 	public JTextField getAbbrevField()
 	{
-		return abbrev;
+		return (JTextField) abbrev.clone();
 	} //}}}
 
 	//{{{ getBeforeCaretTextArea() method
 	public JTextArea getBeforeCaretTextArea()
 	{
-		return beforeCaret;
+		return (JTextArea) beforeCaret.clone();
 	} //}}}
 
 	//{{{ getAfterCaretTextArea() method
 	public JTextArea getAfterCaretTextArea()
 	{
-		return afterCaret;
+		return (JTextArea) afterCaret.clone();
 	} //}}}
 
 	//{{{ Private members
